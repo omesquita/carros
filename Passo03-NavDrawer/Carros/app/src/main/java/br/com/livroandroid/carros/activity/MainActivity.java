@@ -37,7 +37,7 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
         // Configura o drawer layout
         DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerLayout.setStatusBarBackground(R.color.primary_dark);
-        mNavDrawerFragment.setUp(drawerLayout, R.drawable.ic_drawer);
+        mNavDrawerFragment.setUp(drawerLayout);
     }
 
 

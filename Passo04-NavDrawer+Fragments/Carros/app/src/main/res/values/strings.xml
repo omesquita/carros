@@ -11,16 +11,4 @@
     <string name="nav_drawer_email">rlecheta@gmail.com</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <!-- Sobre -->
-    <string name="about_dialog_text">
-<![CDATA[
-        <b>Aplicativo dos Carros 2015</b><br>
-        Versao %s<br><br>
-        <a href="http://www.livroandroid.com.br">http://livroandroid.com.br</a><br><br>
-        <a href="http://www.facebook.com/ricardolecheta">http://facebook.com/ricardolecheta</a>
-    ]]>
-    </string>
-    <string name="about_dialog_title">Livro Android</string>
-    <string name="ok">OK</string>
-
 </resources>
