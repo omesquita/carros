@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.JavascriptInterface;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
@@ -20,7 +22,7 @@ import br.com.livroandroid.carros.R;
  * @author Ricardo Lecheta
  */
 public class SiteLivroFragment extends BaseFragment {
-    private static final String URL_SOBRE = "http://www.livroandroid.com.br/";
+    private static final String URL_SOBRE = "http://www.livroandroid.com.br/sobre.htm";
     private WebView webview;
     private ProgressBar progress;
     protected SwipeRefreshLayout swipeLayout;
@@ -34,6 +36,8 @@ public class SiteLivroFragment extends BaseFragment {
 
         setWebViewClient(webview);
 
+        configJavaScript();
+
         // Carrega a página
         webview.loadUrl(URL_SOBRE);
 
@@ -46,6 +50,22 @@ public class SiteLivroFragment extends BaseFragment {
                 R.color.refresh_progress_3);
 
         return view;
+    }
+
+    private void configJavaScript() {
+        WebSettings settings = webview.getSettings();
+        // Ativa o javascript na página
+        settings.setJavaScriptEnabled(true);
+        // Publica a interface para o javascript
+        webview.addJavascriptInterface(new LivroAndroidInterface(), "LivroAndroid");
+        // Configura o webview
+    }
+
+    class LivroAndroidInterface {
+        @JavascriptInterface
+        public void sobre() {
+            toast("Clicou na figura do livro!");
+        }
     }
 
     private SwipeRefreshLayout.OnRefreshListener OnRefreshListener() {
