@@ -37,7 +37,7 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
 
         setUpToolbar();
 
-        // Navigation Drawer 3
+        // Navigation Drawer 4
         mNavDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.nav_drawer_fragment);
 
