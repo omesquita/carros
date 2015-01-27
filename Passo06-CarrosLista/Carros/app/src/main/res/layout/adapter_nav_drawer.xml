@@ -16,7 +16,6 @@
         android:src="@drawable/ic_drawer_carro" />
     <TextView
         android:id="@+id/text"
-        fontPath="fonts/Roboto-Medium.ttf"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Menu"

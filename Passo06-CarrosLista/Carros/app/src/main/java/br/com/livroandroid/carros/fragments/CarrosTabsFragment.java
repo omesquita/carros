@@ -35,7 +35,7 @@ public class CarrosTabsFragment extends BaseFragment {
         log("onCreateView");
 
         mViewPager = (ViewPager) view.findViewById(R.id.viewpager);
-        mViewPager.setAdapter(new TabsAdapter(getContext(), getChildFragmentManager()));
+        //mViewPager.setAdapter(new TabsAdapter(getContext(), getChildFragmentManager()));
 
         mSlidingTabLayout = (SlidingTabLayout) getActivity().findViewById(R.id.sliding_tabs);
 
@@ -60,7 +60,7 @@ public class CarrosTabsFragment extends BaseFragment {
             public void onPageSelected(int position) {
                 log("onPageSelected: " + position);
                 currentPage = position;
-                show(true);
+                //show(true);
             }
 
             @Override
