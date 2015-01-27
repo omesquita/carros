@@ -21,7 +21,8 @@ android {
 
 repositories {
     maven {
-        url "file:///r:/gradle/rep"
+        //url "file:///r:/gradle/rep"
+        url "file:///home/ricardo/gradle/rep"
     }
 }
 

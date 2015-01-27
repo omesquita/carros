@@ -23,4 +23,9 @@
     <string name="about_dialog_title">Livro Android</string>
     <string name="ok">OK</string>
 
+    <!-- Tabs -->
+    <string name="classicos">Clássicos</string>
+    <string name="esportivos">Esportivos</string>
+    <string name="luxo">Luxo</string>
+
 </resources>
