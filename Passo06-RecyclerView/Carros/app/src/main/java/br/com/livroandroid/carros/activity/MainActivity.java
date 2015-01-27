@@ -19,6 +19,7 @@ import br.com.livroandroid.carros.adapter.NavDrawerMenuAdapter;
 import br.com.livroandroid.carros.adapter.NavDrawerMenuItem;
 import br.com.livroandroid.carros.fragments.AboutDialog;
 import br.com.livroandroid.carros.fragments.CarrosFragment;
+import br.com.livroandroid.carros.fragments.CarrosTabFragment;
 import br.com.livroandroid.carros.fragments.SiteLivroFragment;
 import livroandroid.lib.fragment.NavigationDrawerFragment;
 
@@ -92,7 +93,8 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
         this.listAdapter.setSelected(position, true);
 
         if (position == 0) {
-            replaceFragment(new CarrosFragment());
+            //replaceFragment(new CarrosFragment());
+            replaceFragment(new CarrosTabFragment());
         } else if (position == 1) {
             replaceFragment(new SiteLivroFragment());
         } else if (position == 2) {
