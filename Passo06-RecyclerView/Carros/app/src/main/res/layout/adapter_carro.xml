@@ -6,12 +6,12 @@
     android:layout_height="match_parent"
     android:layout_margin="6dp"
     android:clickable="true"
-    android:background="@drawable/selector_carro"
     card_view:cardBackgroundColor="@color/white"
     card_view:cardCornerRadius="2dp"
     card_view:cardElevation="6dp">
 
     <LinearLayout
+        android:background="@drawable/selector_carro"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/listPreferredItemHeight"
         android:gravity="center_vertical"

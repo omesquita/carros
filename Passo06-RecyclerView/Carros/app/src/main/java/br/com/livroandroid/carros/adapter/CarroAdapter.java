@@ -2,7 +2,6 @@ package br.com.livroandroid.carros.adapter;
 
 
 import android.content.Context;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +17,6 @@ import java.util.List;
 
 import br.com.livroandroid.carros.R;
 import br.com.livroandroid.carros.domain.Carro;
-import livroandroid.lib.utils.MaterialUtils;
 
 // Herda de RecyclerView.Adapter e declara o tipo genérico <CarroAdapterV2.CarrosViewHolder>
 public class CarroAdapter extends RecyclerView.Adapter<CarroAdapter.CarrosViewHolder> {
@@ -44,9 +42,8 @@ public class CarroAdapter extends RecyclerView.Adapter<CarroAdapter.CarrosViewHo
         // Infla a view do layout
         View view = LayoutInflater.from(context).inflate(R.layout.adapter_carro, viewGroup, false);
 
-        CardView cardView = (CardView) view.findViewById(R.id.card_view);
-
-        //MaterialUtils.setRippleBackgroundEffect(cardView);
+//        CardView cardView = (CardView) view.findViewById(R.id.card_view);
+//        MaterialUtils.setRippleBackgroundEffect(cardView);
 
         // Cria o ViewHolder
         CarrosViewHolder holder = new CarrosViewHolder(view);
