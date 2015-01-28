@@ -8,10 +8,11 @@
     android:clickable="true"
     card_view:cardBackgroundColor="@color/white"
     card_view:cardCornerRadius="2dp"
-    card_view:cardElevation="6dp">
+    card_view:cardElevation="6dp"
+    android:foreground="?attr/selectableItemBackground">
 
     <LinearLayout
-        android:background="@drawable/selector_carro"
+
         android:layout_width="match_parent"
         android:layout_height="?android:attr/listPreferredItemHeight"
         android:gravity="center_vertical"

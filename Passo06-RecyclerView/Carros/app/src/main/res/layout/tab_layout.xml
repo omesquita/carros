@@ -7,4 +7,4 @@
     android:paddingRight="16dp"
     android:textAllCaps="true"
     android:textColor="@color/white"
-    android:background="@drawable/selector_carro" />
+    android:background="?attr/selectableItemBackground" />
