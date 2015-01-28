@@ -25,6 +25,7 @@ public class CarrosTabFragment extends BaseFragment {
         mViewPager = (ViewPager) view.findViewById(R.id.viewpager);
         mViewPager.setAdapter(new TabsAdapter(getContext(), getChildFragmentManager()));
         mSlidingTabLayout = (SlidingTabLayout) view.findViewById(R.id.sliding_tabs);
+        mSlidingTabLayout.setCustomTabView(R.layout.tab_layout, R.id.tabText);
         // Deixa as tabs com mesmo tamanho (layout_weight=1)
         mSlidingTabLayout.setDistributeEvenly(true);
         mSlidingTabLayout.setViewPager(mViewPager);

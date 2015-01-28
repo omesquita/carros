@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -32,6 +33,20 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        /*
+        setContentView(R.layout.tab_layout);
+
+        TextView t = (TextView) findViewById(R.id.tabText);
+        t.setPadding(50,50,50,50);
+        t.setText("BLA BLA BLA");
+        t.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toast("boom ripple");
+            }
+        });
+        */
+
         setContentView(R.layout.activity_main);
 
         FragmentManager supportFragmentManager = getSupportFragmentManager();
