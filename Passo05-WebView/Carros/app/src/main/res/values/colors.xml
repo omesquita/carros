@@ -3,6 +3,7 @@
     <color name="primary">#03A9F4</color>
     <color name="primary_dark">#01579B</color>
     <color name="accent">#F44336</color>
+    <color name="control_highlight">#B3E5FC</color>
 
     <!-- Outras cores -->
     <color name="transparent">#0000</color>

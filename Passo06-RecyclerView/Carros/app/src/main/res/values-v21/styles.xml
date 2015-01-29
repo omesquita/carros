@@ -1,13 +1,10 @@
 <resources>
 
     <style name="AppTheme.NavDrawer" parent="AppTheme">
-
-        <!-- Deixa a System Bar transparente.
-        A Action Bar/Toolbar será desenhada por cima.
-        -->
+        <!-- Habilita o overlay mode na action bar -->
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:statusBarColor">@android:color/holo_green_dark</item>
+        <item name="android:statusBarColor">@color/primary_dark</item>
 
     </style>
 

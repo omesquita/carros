@@ -12,9 +12,9 @@
         <item name="colorControlHighlight">@color/control_highlight</item>
     </style>
 
-    <!-- Tema Com SystemBar transparente. -->
+    <!-- Tema para o Nav Drawer. -->
     <style name="AppTheme.NavDrawer" parent="AppTheme">
-        <!-- NavDrawer Toolbar -->
+        <!-- Habilita o overlay mode na action bar -->
         <item name="windowActionBarOverlay">true</item>
     </style>
 
