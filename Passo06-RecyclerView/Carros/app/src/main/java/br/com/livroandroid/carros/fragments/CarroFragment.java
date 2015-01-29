@@ -15,18 +15,8 @@ public class CarroFragment extends BaseFragment {
     private Carro carro;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setHasOptionsMenu(true);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_carro, container, false);
-
-        setHasOptionsMenu(true);
-
         return view;
     }
 
@@ -41,5 +31,4 @@ public class CarroFragment extends BaseFragment {
 
         Picasso.with(getContext()).load(carro.urlFoto).fit().into(imgView);
     }
-
 }
