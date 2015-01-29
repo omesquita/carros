@@ -12,7 +12,7 @@
         <item name="colorControlHighlight">@color/control_highlight</item>
     </style>
 
-    <!-- Tema do Projeto. -->
+    <!-- Tema Com SystemBar transparente. -->
     <style name="AppTheme.ActionBarOverlay" parent="AppTheme">
         <!-- NavDrawer Toolbar -->
         <item name="windowActionBarOverlay">true</item>
