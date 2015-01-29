@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="AppTheme.ActionBarOverlay" parent="AppTheme">
+    <style name="AppTheme.NavDrawer" parent="AppTheme">
 
         <!-- Deixa a System Bar transparente.
         A Action Bar/Toolbar será desenhada por cima.
