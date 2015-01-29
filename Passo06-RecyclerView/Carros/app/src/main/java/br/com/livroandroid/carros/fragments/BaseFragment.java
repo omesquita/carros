@@ -1,7 +1,5 @@
 package br.com.livroandroid.carros.fragments;
 
-import android.support.v4.app.Fragment;
-
 /**
  * Created by Ricardo Lecheta on 24/01/2015.
  */

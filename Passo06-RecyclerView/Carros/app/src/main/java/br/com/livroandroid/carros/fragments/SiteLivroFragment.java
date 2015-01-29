@@ -98,7 +98,7 @@ public class SiteLivroFragment extends BaseFragment {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 Log.d("livroandroid", "webview url: " + url);
                 if (url != null && url.endsWith("sobre.htm")) {
-                   AboutDialog.showAbout(getFragmentManager());
+                    AboutDialog.showAbout(getFragmentManager());
                 }
                 return super.shouldOverrideUrlLoading(view, url);
             }

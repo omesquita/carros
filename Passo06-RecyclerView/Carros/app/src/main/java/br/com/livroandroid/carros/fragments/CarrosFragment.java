@@ -1,10 +1,7 @@
 package br.com.livroandroid.carros.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,11 +13,9 @@ import android.widget.Toast;
 import java.util.List;
 
 import br.com.livroandroid.carros.R;
-import br.com.livroandroid.carros.activity.CarroActivity;
 import br.com.livroandroid.carros.adapter.CarroAdapter;
 import br.com.livroandroid.carros.domain.Carro;
 import br.com.livroandroid.carros.domain.CarroService;
-import livroandroid.lib.utils.MaterialUtils;
 
 public class CarrosFragment extends BaseFragment {
     protected RecyclerView recyclerView;
@@ -58,7 +53,7 @@ public class CarrosFragment extends BaseFragment {
 
     private void taskCarros() {
         // Busca os carros
-        this.carros = CarroService.getCarros(getContext(),tipo);
+        this.carros = CarroService.getCarros(getContext(), tipo);
         // Atualiza a lista
         recyclerView.setAdapter(new CarroAdapter(getContext(), carros, onClickCarro()));
     }
@@ -68,10 +63,7 @@ public class CarrosFragment extends BaseFragment {
             @Override
             public void onClickCarro(View view, int idx) {
                 Carro c = carros.get(idx);
-                //Toast.makeText(getContext(), "Carro: " + c.nome, Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getContext(), CarroActivity.class);
-                intent.putExtra("carro", c);
-                startActivity(intent);
+                Toast.makeText(getContext(), "Carro: " + c.nome, Toast.LENGTH_SHORT).show();
             }
         };
     }

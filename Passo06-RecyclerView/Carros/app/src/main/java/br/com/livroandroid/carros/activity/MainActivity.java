@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
-import android.widget.TextView;
 
 import java.util.List;
 
@@ -19,7 +18,6 @@ import br.com.livroandroid.carros.R;
 import br.com.livroandroid.carros.adapter.NavDrawerMenuAdapter;
 import br.com.livroandroid.carros.adapter.NavDrawerMenuItem;
 import br.com.livroandroid.carros.fragments.AboutDialog;
-import br.com.livroandroid.carros.fragments.CarrosFragment;
 import br.com.livroandroid.carros.fragments.CarrosTabFragment;
 import br.com.livroandroid.carros.fragments.SiteLivroFragment;
 import livroandroid.lib.fragment.NavigationDrawerFragment;

@@ -26,8 +26,7 @@
                 android:id="@+id/img"
                 android:layout_width="116dp"
                 android:layout_height="50dp"
-                android:src="@drawable/ic_launcher"
-                 />
+                android:src="@drawable/ic_launcher" />
             <!-- Barra de progresso enquanto carrega a foto -->
             <ProgressBar
                 android:id="@+id/progressImg"

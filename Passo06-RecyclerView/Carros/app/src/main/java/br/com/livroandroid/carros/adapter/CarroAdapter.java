@@ -17,7 +17,6 @@ import java.util.List;
 
 import br.com.livroandroid.carros.R;
 import br.com.livroandroid.carros.domain.Carro;
-import livroandroid.lib.utils.MaterialUtils;
 
 // Herda de RecyclerView.Adapter e declara o tipo genérico <CarroAdapterV2.CarrosViewHolder>
 public class CarroAdapter extends RecyclerView.Adapter<CarroAdapter.CarrosViewHolder> {

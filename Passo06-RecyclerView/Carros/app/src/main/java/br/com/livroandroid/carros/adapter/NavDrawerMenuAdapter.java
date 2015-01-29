@@ -20,23 +20,28 @@ public class NavDrawerMenuAdapter extends BaseAdapter {
     private final List<NavDrawerMenuItem> list;
     private final Context context;
     private LayoutInflater inflater;
+
     public NavDrawerMenuAdapter(Context context, List<NavDrawerMenuItem> list) {
         this.context = context;
         this.list = list;
         this.inflater = (LayoutInflater) LayoutInflater.from(context);
     }
+
     @Override
     public int getCount() {
         return list != null ? list.size() : 0;
     }
+
     @Override
     public Object getItem(int position) {
         return list != null ? list.get(position) : null;
     }
+
     @Override
     public long getItemId(int position) {
         return position;
     }
+
     @Override
     public View getView(int position, View view, ViewGroup parent) {
         ViewHolder holder = null;
@@ -64,11 +69,13 @@ public class NavDrawerMenuAdapter extends BaseAdapter {
         }
         return view;
     }
+
     public void setSelected(int position, boolean selected) {
         clearSelected();
         list.get(position).selected = selected;
         notifyDataSetChanged();
     }
+
     public void clearSelected() {
         if (list != null) {
             for (NavDrawerMenuItem item : list) {
@@ -77,6 +84,7 @@ public class NavDrawerMenuAdapter extends BaseAdapter {
             notifyDataSetChanged();
         }
     }
+
     // Design Patter "ViewHolder"
     static class ViewHolder {
         TextView text;
