@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="AppTheme" parent="AppTheme.Base">
+    <style name="AppTheme.ActionBarOverlay" parent="AppTheme">
 
         <!-- Deixa a System Bar transparente.
         A Action Bar/Toolbar será desenhada por cima.
@@ -9,14 +9,6 @@
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/holo_green_dark</item>
 
-    </style>
-
-    <style name="TabIndicatorTheme" parent="">
-        <item name="colorControlHighlight">@color/primary</item>
-    </style>
-
-    <style name="TabIndicator">
-        <item name="android:theme">@style/TabIndicatorTheme</item>
     </style>
 
 </resources>

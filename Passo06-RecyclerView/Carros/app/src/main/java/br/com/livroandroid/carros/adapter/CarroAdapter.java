@@ -44,7 +44,6 @@ public class CarroAdapter extends RecyclerView.Adapter<CarroAdapter.CarrosViewHo
         View view = LayoutInflater.from(context).inflate(R.layout.adapter_carro, viewGroup, false);
 
         CardView cardView = (CardView) view.findViewById(R.id.card_view);
-        MaterialUtils.setRippleBackgroundEffect(cardView);
 
         // Cria o ViewHolder
         CarrosViewHolder holder = new CarrosViewHolder(view);
