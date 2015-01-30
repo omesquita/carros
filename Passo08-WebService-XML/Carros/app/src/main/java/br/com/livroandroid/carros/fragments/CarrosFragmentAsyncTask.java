@@ -21,7 +21,10 @@ import br.com.livroandroid.carros.adapter.CarroAdapter;
 import br.com.livroandroid.carros.domain.Carro;
 import br.com.livroandroid.carros.domain.CarroService;
 
-public class CarrosFragment extends BaseFragment {
+/**
+ * Classe que demonstra como utilizar a AsyncTask
+ */
+public class CarrosFragmentAsyncTask extends BaseFragment {
     protected RecyclerView recyclerView;
     private List<Carro> carros;
     private LinearLayoutManager mLayoutManager;
@@ -57,34 +60,31 @@ public class CarrosFragment extends BaseFragment {
 
     private void taskCarros() {
         // Busca os carros: Dispara a Task
-        startTask("carros", new GetCarrosTask(), R.id.progress);
+        new GetCarrosTask().execute();
     }
 
     // Task para buscar os carros
-    private class GetCarrosTask implements TaskListener<List<Carro>> {
+    private class GetCarrosTask extends AsyncTask<Void,Void,List<Carro>> {
         @Override
-        public List<Carro> execute() throws Exception {
-            // Busca os carros em background (Thread)
-            return CarroService.getCarros(getContext(), tipo);
+        protected List<Carro> doInBackground(Void... params) {
+            try {
+                // Busca os carros em background (Thread)
+                return CarroService.getCarros(getContext(), tipo);
+            } catch (IOException e) {
+                Log.e("livroandroid", e.getMessage(), e);
+                return null;
+            }
         }
-        @Override
-        public void updateView(List<Carro> carros) {
-            if (carros != null) {
-                CarrosFragment.this.carros = carros;
+        // Atualiza a interface
+        protected void onPostExecute(List<Carro> carros) {
+            if(carros != null) {
+                CarrosFragmentAsyncTask.this.carros = carros;
                 // Atualiza a view na UI Thread
                 recyclerView.setAdapter(new CarroAdapter(getContext(), carros, onClickCarro()));
             }
         }
-        @Override
-        public void onError(Exception e) {
-            alert("Ocorreu algum erro ao buscar os dados.");
-        }
-
-        @Override
-        public void onCancelled(String s) {
-
-        }
     }
+
 
     private CarroAdapter.CarroOnClickListener onClickCarro() {
         return new CarroAdapter.CarroOnClickListener() {
