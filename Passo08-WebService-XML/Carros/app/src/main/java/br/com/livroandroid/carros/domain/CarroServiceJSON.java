@@ -13,7 +13,12 @@ import java.util.List;
 
 import livroandroid.lib.utils.HttpHelper;
 
-public class CarroService {
+/**
+ * http://www.livroandroid.com.br/livro/carros/carros_classicos.json
+ * http://www.livroandroid.com.br/livro/carros/carros_esportivos.json
+ * http://www.livroandroid.com.br/livro/carros/carros_luxo.json
+ */
+public class CarroServiceJSON {
     private static final String URL = "http://www.livroandroid.com.br/livro/carros/carros_{tipo}.json";
     private static final boolean LOG_ON = false;
     private static final String TAG = "CarroService";

@@ -31,4 +31,8 @@
     <string name="luxo">Luxo</string>
     <string name="title_activity_carro">Carro</string>
 
+    <!-- Action Bar -->
+    <string name="actionbar_menu_refresh">Refresh</string>
+    <string name="error_conexao_indisponivel">Conexão indisponível. Verifique seu Wi-FI ou 3G.</string>
+
 </resources>

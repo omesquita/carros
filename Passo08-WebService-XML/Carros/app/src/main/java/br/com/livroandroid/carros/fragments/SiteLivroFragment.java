@@ -42,7 +42,7 @@ public class SiteLivroFragment extends BaseFragment {
         webview.loadUrl(URL_SOBRE);
 
         // Swipe to Refresh
-        swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_container);
+        swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeToRefresh);
         swipeLayout.setOnRefreshListener(OnRefreshListener());
         swipeLayout.setColorSchemeResources(
                 R.color.refresh_progress_1,

@@ -23,6 +23,7 @@ public class CarrosTabFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_carros_tab, container, false);
         mViewPager = (ViewPager) view.findViewById(R.id.viewpager);
+        mViewPager.setOffscreenPageLimit(2);
         mViewPager.setAdapter(new TabsAdapter(getContext(), getChildFragmentManager()));
         mSlidingTabLayout = (SlidingTabLayout) view.findViewById(R.id.sliding_tabs);
         mSlidingTabLayout.setCustomTabView(R.layout.tab_layout, R.id.tabText);
