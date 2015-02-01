@@ -50,7 +50,7 @@ public class CarroDB extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Caso mude a versão do banco de dados, podemos executar um SQL aqui
-        if(oldVersion == 1 && newVersion == 2) {
+        if (oldVersion == 1 && newVersion == 2) {
             // Execute o script para atualizar a versão...
         }
     }
@@ -90,11 +90,24 @@ public class CarroDB extends SQLiteOpenHelper {
         }
     }
 
+    // Deleta o carro
+    public int delete(Carro carro) {
+        SQLiteDatabase db = getWritableDatabase();
+        try {
+            // delete from carro where _id=?
+            int count = db.delete("carro", "_id=?", new String[]{String.valueOf(carro.id)});
+            Log.i(TAG, "Deletou [" + count + "] registro.");
+            return count;
+        } finally {
+            db.close();
+        }
+    }
+
     // Deleta os carros do tipo fornecido
     public int deleteCarrosByTipo(String tipo) {
         SQLiteDatabase db = getWritableDatabase();
         try {
-            // delete from carro where _id=?
+            // delete from carro where tipo=?
             int count = db.delete("carro", "tipo=?", new String[]{tipo});
             Log.i(TAG, "Deletou [" + count + "] registros");
             return count;

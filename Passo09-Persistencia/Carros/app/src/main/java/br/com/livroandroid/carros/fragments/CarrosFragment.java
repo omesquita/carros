@@ -8,9 +8,6 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -80,7 +77,7 @@ public class CarrosFragment extends BaseFragment {
     private void taskCarros(boolean refresh) {
         recyclerView.setAdapter(null);
         // Busca os carros: Dispara a Task
-        if(AndroidUtils.isNetworkAvailable(getContext())) {
+        if (AndroidUtils.isNetworkAvailable(getContext())) {
             startTask("carros", new GetCarrosTask(refresh), R.id.swipeToRefresh);
         } else {
             alert(R.string.error_conexao_indisponivel);
@@ -88,9 +85,23 @@ public class CarrosFragment extends BaseFragment {
         }
     }
 
+    private CarroAdapter.CarroOnClickListener onClickCarro() {
+        return new CarroAdapter.CarroOnClickListener() {
+            @Override
+            public void onClickCarro(View view, int idx) {
+                Carro c = carros.get(idx);
+                //Toast.makeText(getContext(), "Carro: " + c.nome, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(), CarroActivity.class);
+                intent.putExtra("carro", c);
+                startActivity(intent);
+            }
+        };
+    }
+
     // Task para buscar os carros
     private class GetCarrosTask implements TaskListener<List<Carro>> {
         private boolean refresh;
+
         public GetCarrosTask(boolean refresh) {
             this.refresh = refresh;
         }
@@ -122,18 +133,4 @@ public class CarrosFragment extends BaseFragment {
 
         }
     }
-
-    private CarroAdapter.CarroOnClickListener onClickCarro() {
-        return new CarroAdapter.CarroOnClickListener() {
-            @Override
-            public void onClickCarro(View view, int idx) {
-                Carro c = carros.get(idx);
-                //Toast.makeText(getContext(), "Carro: " + c.nome, Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getContext(), CarroActivity.class);
-                intent.putExtra("carro", c);
-                startActivity(intent);
-            }
-        };
-    }
-
 }

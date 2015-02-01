@@ -2,10 +2,10 @@
     android:id="@+id/tabText"
     android:layout_width="wrap_content"
     android:layout_height="48dp"
+    android:background="?attr/selectableItemBackground"
     android:gravity="center"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:textAllCaps="true"
     android:textColor="@color/white"
-    android:textSize="12sp"
-    android:background="?attr/selectableItemBackground" />
+    android:textSize="12sp" />

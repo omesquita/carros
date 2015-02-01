@@ -23,9 +23,9 @@ import br.com.livroandroid.carros.R;
  */
 public class SiteLivroFragment extends BaseFragment {
     private static final String URL_SOBRE = "http://www.livroandroid.com.br/sobre.htm";
+    protected SwipeRefreshLayout swipeLayout;
     private WebView webview;
     private ProgressBar progress;
-    protected SwipeRefreshLayout swipeLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -61,13 +61,6 @@ public class SiteLivroFragment extends BaseFragment {
         // Configura o webview
     }
 
-    class LivroAndroidInterface {
-        @JavascriptInterface
-        public void sobre() {
-            toast("Clicou na figura do livro!");
-        }
-    }
-
     private SwipeRefreshLayout.OnRefreshListener OnRefreshListener() {
         return new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -98,10 +91,17 @@ public class SiteLivroFragment extends BaseFragment {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 Log.d("livroandroid", "webview url: " + url);
                 if (url != null && url.endsWith("sobre.htm")) {
-                   AboutDialog.showAbout(getFragmentManager());
+                    AboutDialog.showAbout(getFragmentManager());
                 }
                 return super.shouldOverrideUrlLoading(view, url);
             }
         });
+    }
+
+    class LivroAndroidInterface {
+        @JavascriptInterface
+        public void sobre() {
+            toast("Clicou na figura do livro!");
+        }
     }
 }

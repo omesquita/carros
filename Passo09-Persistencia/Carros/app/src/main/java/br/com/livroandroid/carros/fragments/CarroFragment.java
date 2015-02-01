@@ -2,6 +2,9 @@ package br.com.livroandroid.carros.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -17,7 +20,46 @@ public class CarroFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_carro, container, false);
+        setHasOptionsMenu(true);
         return view;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_frag_carro, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_edit) {
+            //toast("Editar: " + carro.nome);
+            EditarCarroDialog.show(getFragmentManager(), carro, new EditarCarroDialog.Callback() {
+                @Override
+                public void onCarroUpdated(Carro carro) {
+                    toast("Carro [" + carro.nome + "] atualizado");
+                }
+            });
+            return true;
+        } else if (item.getItemId() == R.id.action_remove) {
+            //toast("Deletar: " + carro.nome);
+
+            DeletarCarroDialog.show(getFragmentManager(), carro, new DeletarCarroDialog.Callback() {
+                @Override
+                public void onCarroDeleted(Carro carro) {
+                    toast("Carro [" + carro.nome + "] deletado.");
+                }
+            });
+
+            return true;
+        } else if (item.getItemId() == R.id.action_share) {
+            toast("Compartilhar");
+        } else if (item.getItemId() == R.id.action_maps) {
+            toast("Mapa");
+        } else if (item.getItemId() == R.id.action_video) {
+            toast("Vídeo");
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     // Método público chamado pela activity para atualizar os dados do carro

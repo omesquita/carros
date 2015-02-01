@@ -1,7 +1,7 @@
 package br.com.livroandroid.carros.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
 
-import java.io.File;
 import java.util.List;
 
 import br.com.livroandroid.carros.R;
@@ -23,7 +22,6 @@ import br.com.livroandroid.carros.fragments.AboutDialog;
 import br.com.livroandroid.carros.fragments.CarrosTabFragment;
 import br.com.livroandroid.carros.fragments.SiteLivroFragment;
 import livroandroid.lib.fragment.NavigationDrawerFragment;
-import livroandroid.lib.utils.SDCardUtils;
 
 
 public class MainActivity extends BaseActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -32,21 +30,14 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
     private NavDrawerMenuAdapter listAdapter;
 
     @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        log("ON NEW INTENT!");
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*
-        setContentView(R.layout.tab_layout);
-
-        TextView t = (TextView) findViewById(R.id.tabText);
-        t.setPadding(50,50,50,50);
-        t.setText("BLA BLA BLA");
-        t.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                toast("boom ripple");
-            }
-        });
-        */
 
         setContentView(R.layout.activity_main);
 

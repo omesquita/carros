@@ -7,4 +7,8 @@
     <dimen name="foto_carro_width">260dp</dimen>
     <dimen name="foto_carro_height">110dp</dimen>
 
+    <!-- EditarCarroFragment -->
+    <dimen name="popup_width">300dp</dimen>
+    <dimen name="popup_height">300dp</dimen>
+
 </resources>

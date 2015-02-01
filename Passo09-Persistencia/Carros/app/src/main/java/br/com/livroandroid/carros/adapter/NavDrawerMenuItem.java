@@ -15,10 +15,12 @@ public class NavDrawerMenuItem {
     public int img;
     // Para colocar um fundo cinza quando a linha está selecionada
     public boolean selected;
+
     public NavDrawerMenuItem(int title, int img) {
         this.title = title;
         this.img = img;
     }
+
     // Cria a lista com os itens de menu
     public static List<NavDrawerMenuItem> getList() {
         List<NavDrawerMenuItem> list = new ArrayList<NavDrawerMenuItem>();

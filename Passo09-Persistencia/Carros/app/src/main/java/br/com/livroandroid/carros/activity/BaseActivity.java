@@ -9,6 +9,16 @@ import br.com.livroandroid.carros.R;
 public class BaseActivity extends livroandroid.lib.activity.BaseActivity {
 
     @Override
+    protected boolean isLogLifecycle() {
+        return super.isLogLifecycle();
+    }
+
+    @Override
+    protected boolean isLogOn() {
+        return false;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 

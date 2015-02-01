@@ -14,6 +14,7 @@
         android:layout_height="24dp"
         android:layout_marginRight="32dp"
         android:src="@drawable/ic_drawer_carro" />
+
     <TextView
         android:id="@+id/text"
         fontPath="fonts/Roboto-Medium.ttf"

@@ -63,29 +63,6 @@ public class CarrosFragmentAsyncTask extends BaseFragment {
         new GetCarrosTask().execute();
     }
 
-    // Task para buscar os carros
-    private class GetCarrosTask extends AsyncTask<Void,Void,List<Carro>> {
-        @Override
-        protected List<Carro> doInBackground(Void... params) {
-            try {
-                // Busca os carros em background (Thread)
-                return CarroService.getCarros(getContext(), tipo);
-            } catch (IOException e) {
-                Log.e("livroandroid", e.getMessage(), e);
-                return null;
-            }
-        }
-        // Atualiza a interface
-        protected void onPostExecute(List<Carro> carros) {
-            if(carros != null) {
-                CarrosFragmentAsyncTask.this.carros = carros;
-                // Atualiza a view na UI Thread
-                recyclerView.setAdapter(new CarroAdapter(getContext(), carros, onClickCarro()));
-            }
-        }
-    }
-
-
     private CarroAdapter.CarroOnClickListener onClickCarro() {
         return new CarroAdapter.CarroOnClickListener() {
             @Override
@@ -97,6 +74,29 @@ public class CarrosFragmentAsyncTask extends BaseFragment {
                 startActivity(intent);
             }
         };
+    }
+
+    // Task para buscar os carros
+    private class GetCarrosTask extends AsyncTask<Void, Void, List<Carro>> {
+        @Override
+        protected List<Carro> doInBackground(Void... params) {
+            try {
+                // Busca os carros em background (Thread)
+                return CarroService.getCarros(getContext(), tipo);
+            } catch (IOException e) {
+                Log.e("livroandroid", e.getMessage(), e);
+                return null;
+            }
+        }
+
+        // Atualiza a interface
+        protected void onPostExecute(List<Carro> carros) {
+            if (carros != null) {
+                CarrosFragmentAsyncTask.this.carros = carros;
+                // Atualiza a view na UI Thread
+                recyclerView.setAdapter(new CarroAdapter(getContext(), carros, onClickCarro()));
+            }
+        }
     }
 
 }

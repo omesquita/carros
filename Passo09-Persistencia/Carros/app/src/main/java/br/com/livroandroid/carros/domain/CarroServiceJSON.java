@@ -22,12 +22,14 @@ public class CarroServiceJSON {
     private static final String URL = "http://www.livroandroid.com.br/livro/carros/carros_{tipo}.json";
     private static final boolean LOG_ON = false;
     private static final String TAG = "CarroService";
+
     public static List<Carro> getCarros(Context context, String tipo) throws IOException {
         String url = URL.replace("{tipo}", tipo);
         String json = HttpHelper.doGet(url);
         List<Carro> carros = parserJSON(context, json);
         return carros;
     }
+
     private static List<Carro> parserJSON(Context context, String json) throws IOException {
         List<Carro> carros = new ArrayList<Carro>();
         try {
