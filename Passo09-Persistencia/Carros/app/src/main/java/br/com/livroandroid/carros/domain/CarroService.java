@@ -17,10 +17,40 @@ public class CarroService {
     private static final String URL = "http://www.livroandroid.com.br/livro/carros/carros_{tipo}.json";
     private static final boolean LOG_ON = false;
     private static final String TAG = "CarroService";
+
     public static List<Carro> getCarros(Context context, String tipo) throws IOException {
+        // Por padrão deixa fazer cache
+        return getCarros(context,tipo,false);
+    }
+    public static List<Carro> getCarros(Context context, String tipo, boolean refresh) throws IOException {
+        CarroDB db = new CarroDB(context);
+        if(!refresh) {
+            // Consulta no banco de dados
+            List<Carro> carros = db.findAllByTipo(tipo);
+            if(carros != null && carros.size() > 0) {
+                Log.d(TAG,"Retornando " + carros.size() + " carros ["+tipo+"] do banco");
+                // Se existe retorna os carros salvos
+                return carros;
+            }
+        }
+
+        // Caso não existe no banco de dados busca no web service
         String url = URL.replace("{tipo}", tipo);
+        Log.d(TAG,"Carros ["+tipo+"]: " + url);
         String json = HttpHelper.doGet(url);
         List<Carro> carros = parserJSON(context, json);
+
+        // Deleta os carros pelo tipo para limpar o banco
+        db.deleteCarrosByTipo(tipo);
+
+        // Salva todos os carros
+        for (Carro c: carros) {
+            c.tipo = tipo;
+            db.save(c);
+        }
+
+        Log.d(TAG,"Carros salvos no banco");
+
         return carros;
     }
     private static List<Carro> parserJSON(Context context, String json) throws IOException {

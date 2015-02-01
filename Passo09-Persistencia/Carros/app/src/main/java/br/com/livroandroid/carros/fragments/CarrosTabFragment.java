@@ -10,6 +10,7 @@ import com.google.samples.apps.iosched.ui.widget.SlidingTabLayout;
 
 import br.com.livroandroid.carros.R;
 import br.com.livroandroid.carros.adapter.TabsAdapter;
+import livroandroid.lib.utils.PrefsSDCard;
 
 /**
  * Fragment que controla as Tabs dos carros (classicos,esportivos,luxo)
@@ -17,19 +18,19 @@ import br.com.livroandroid.carros.adapter.TabsAdapter;
 public class CarrosTabFragment extends BaseFragment {
 
     private SlidingTabLayout mSlidingTabLayout;
-    private ViewPager mViewPager;
+    private ViewPager viewPager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_carros_tab, container, false);
-        mViewPager = (ViewPager) view.findViewById(R.id.viewpager);
-        mViewPager.setOffscreenPageLimit(2);
-        mViewPager.setAdapter(new TabsAdapter(getContext(), getChildFragmentManager()));
+        viewPager = (ViewPager) view.findViewById(R.id.viewpager);
+        viewPager.setOffscreenPageLimit(2);
+        viewPager.setAdapter(new TabsAdapter(getContext(), getChildFragmentManager()));
         mSlidingTabLayout = (SlidingTabLayout) view.findViewById(R.id.sliding_tabs);
         mSlidingTabLayout.setCustomTabView(R.layout.tab_layout, R.id.tabText);
         // Deixa as tabs com mesmo tamanho (layout_weight=1)
         mSlidingTabLayout.setDistributeEvenly(true);
-        mSlidingTabLayout.setViewPager(mViewPager);
+        mSlidingTabLayout.setViewPager(viewPager);
         mSlidingTabLayout.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
             @Override
             public int getIndicatorColor(int i) {
@@ -37,6 +38,24 @@ public class CarrosTabFragment extends BaseFragment {
                 return getResources().getColor(R.color.accent);
             }
         });
+        mSlidingTabLayout.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                // Salva o índice da página/tab selecionada
+                PrefsSDCard.setInteger(getContext(), "tabIdx", viewPager.getCurrentItem());
+            }
+
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
+        // Inicia o aplicativo com o índice da última tab/página selecionada
+        int tabIdx = PrefsSDCard.getInteger(getContext(), "tabIdx");
+        viewPager.setCurrentItem(tabIdx);
         return view;
     }
 }

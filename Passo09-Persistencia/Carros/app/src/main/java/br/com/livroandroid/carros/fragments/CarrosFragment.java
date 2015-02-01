@@ -64,7 +64,7 @@ public class CarrosFragment extends BaseFragment {
             @Override
             public void onRefresh() {
                 // Atualiza ao fazer o gesto Swipe To Refresh
-                taskCarros();
+                taskCarros(true);
             }
         };
     }
@@ -73,14 +73,14 @@ public class CarrosFragment extends BaseFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        taskCarros();
+        taskCarros(false);
     }
 
-    private void taskCarros() {
+    private void taskCarros(boolean refresh) {
         recyclerView.setAdapter(null);
         // Busca os carros: Dispara a Task
         if(AndroidUtils.isNetworkAvailable(getContext())) {
-            startTask("carros", new GetCarrosTask(), R.id.swipeToRefresh);
+            startTask("carros", new GetCarrosTask(refresh), R.id.swipeToRefresh);
         } else {
             alert(R.string.error_conexao_indisponivel);
             swipeLayout.setRefreshing(false);
@@ -89,11 +89,16 @@ public class CarrosFragment extends BaseFragment {
 
     // Task para buscar os carros
     private class GetCarrosTask implements TaskListener<List<Carro>> {
+        private boolean refresh;
+        public GetCarrosTask(boolean refresh) {
+            this.refresh = refresh;
+        }
+
         @Override
         public List<Carro> execute() throws Exception {
             Thread.sleep(200);
             // Busca os carros em background (Thread)
-            return CarroService.getCarros(getContext(), tipo);
+            return CarroService.getCarros(getContext(), tipo, refresh);
         }
 
         @Override

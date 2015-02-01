@@ -1,6 +1,7 @@
 package br.com.livroandroid.carros.activity;
 
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
@@ -11,18 +12,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
-import android.widget.TextView;
 
+import java.io.File;
 import java.util.List;
 
 import br.com.livroandroid.carros.R;
 import br.com.livroandroid.carros.adapter.NavDrawerMenuAdapter;
 import br.com.livroandroid.carros.adapter.NavDrawerMenuItem;
 import br.com.livroandroid.carros.fragments.AboutDialog;
-import br.com.livroandroid.carros.fragments.CarrosFragment;
 import br.com.livroandroid.carros.fragments.CarrosTabFragment;
 import br.com.livroandroid.carros.fragments.SiteLivroFragment;
 import livroandroid.lib.fragment.NavigationDrawerFragment;
+import livroandroid.lib.utils.SDCardUtils;
 
 
 public class MainActivity extends BaseActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -63,6 +64,27 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
         mNavDrawerFragment.setUp(drawerLayout);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        /**
+         File file = SDCardUtils.getPrivateFile(this, "temp", "private.txt");
+         Log.d("livroandroid", "getPrivateFile: " + file);
+         SDCardUtils.write(file, "Ricardo");
+
+         file = SDCardUtils.getPublicFile("temp", "public.txt");
+         Log.d("livroandroid", "getPublicFile: " + file);
+         SDCardUtils.write(file, "Ricardo");
+
+         file = SDCardUtils.getPublicFileWithType("temp", "publicDCIM.txt", Environment.DIRECTORY_DCIM);
+         Log.d("livroandroid", "getPublicFileWithType: " + file);
+         SDCardUtils.write(file, "Ricardo");
+
+         file = SDCardUtils.getPublicFileWithType("temp", "publicDownload.txt", Environment.DIRECTORY_DOWNLOADS);
+         Log.d("livroandroid", "getPublicFileWithType: " + file);
+         SDCardUtils.write(file, "Ricardo");
+         */
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
