@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
+import br.com.livroandroid.carros.CarrosApplication;
 import br.com.livroandroid.carros.R;
 import br.com.livroandroid.carros.activity.CarroActivity;
 import br.com.livroandroid.carros.adapter.CarroAdapter;
@@ -72,6 +73,23 @@ public class CarrosFragment extends BaseFragment {
 
         // Por padrão busca os carros do banco de dados.
         taskCarros(false);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if(CarrosApplication.getInstance().isNeedUpdateCarrosList()) {
+            // Faz a leitura novamente do banco de dados
+            taskCarros(false);
+            toast("Lista de carros atualizada!");
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        CarrosApplication.getInstance().setNeedUpdateCarrosList(false);
     }
 
     private void taskCarros(boolean refresh) {

@@ -11,6 +11,7 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
+import br.com.livroandroid.carros.CarrosApplication;
 import br.com.livroandroid.carros.R;
 import br.com.livroandroid.carros.domain.Carro;
 
@@ -37,7 +38,10 @@ public class CarroFragment extends BaseFragment {
             EditarCarroDialog.show(getFragmentManager(), carro, new EditarCarroDialog.Callback() {
                 @Override
                 public void onCarroUpdated(Carro carro) {
-                    toast("Carro [" + carro.nome + "] atualizado");
+                    toast("Carro [" + carro.nome + "] atualizado.");
+                    CarrosApplication.getInstance().setNeedUpdateCarrosList(true);
+                    // Atualiza o título com o novo nome
+                    getActionBar().setTitle(carro.nome);
                 }
             });
             return true;
@@ -48,6 +52,9 @@ public class CarroFragment extends BaseFragment {
                 @Override
                 public void onCarroDeleted(Carro carro) {
                     toast("Carro [" + carro.nome + "] deletado.");
+                    CarrosApplication.getInstance().setNeedUpdateCarrosList(true);
+                    // Fecha a activity
+                    getActivity().finish();
                 }
             });
 

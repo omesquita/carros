@@ -15,6 +15,8 @@ public class CarrosApplication extends Application {
         return instance;
     }
 
+    private boolean needUpdateCarrosList;
+
     @Override
     public void onCreate() {
         Log.d(TAG, "CarrosApplication.onCreate()");
@@ -26,5 +28,13 @@ public class CarrosApplication extends Application {
     public void onTerminate() {
         super.onTerminate();
         Log.d(TAG, "CarrosApplication.onTerminate()");
+    }
+
+    public void setNeedUpdateCarrosList(boolean needUpdateCarrosList) {
+        this.needUpdateCarrosList = needUpdateCarrosList;
+    }
+
+    public boolean isNeedUpdateCarrosList() {
+        return this.needUpdateCarrosList;
     }
 }
