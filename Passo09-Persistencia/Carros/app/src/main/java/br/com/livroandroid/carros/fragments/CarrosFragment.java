@@ -73,6 +73,7 @@ public class CarrosFragment extends BaseFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        // Por padrão busca os carros do banco de dados.
         taskCarros(false);
     }
 
