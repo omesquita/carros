@@ -4,13 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.view.ActionMode;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -57,21 +54,6 @@ public class CarrosFragment extends BaseFragment {
                 R.color.refresh_progress_2,
                 R.color.refresh_progress_3);
 
-        // OnLongClickListener: para deletar um carro
-        recyclerView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                if(actionModeCallback != null) {
-                    return false;
-                }
-                getActivity().startActionMode(actionModeCallback);
-
-                int pos = recyclerView.getChildPosition(v);
-                toast("Bla " + pos);
-                return false;
-            }
-        });
-
         return view;
     }
 
@@ -97,7 +79,7 @@ public class CarrosFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
 
-        if(CarrosApplication.getInstance().isPrecisaAtualizar(this.tipo)) {
+        if (CarrosApplication.getInstance().isPrecisaAtualizar(this.tipo)) {
             // Faz a leitura novamente do banco de dados
             taskCarros(false);
             toast("Lista de carros atualizada!");
@@ -169,26 +151,4 @@ public class CarrosFragment extends BaseFragment {
 
         }
     }
-
-    private android.view.ActionMode.Callback actionModeCallback = new android.view.ActionMode.Callback() {
-        @Override
-        public boolean onCreateActionMode(android.view.ActionMode mode, Menu menu) {
-            return false;
-        }
-
-        @Override
-        public boolean onPrepareActionMode(android.view.ActionMode mode, Menu menu) {
-            return false;
-        }
-
-        @Override
-        public boolean onActionItemClicked(android.view.ActionMode mode, MenuItem item) {
-            return false;
-        }
-
-        @Override
-        public void onDestroyActionMode(android.view.ActionMode mode) {
-
-        }
-    };
 }
