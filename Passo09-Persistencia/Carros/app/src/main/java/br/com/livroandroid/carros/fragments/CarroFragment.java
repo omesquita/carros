@@ -1,5 +1,7 @@
 package br.com.livroandroid.carros.fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -44,6 +46,27 @@ public class CarroFragment extends BaseFragment {
                     getActionBar().setTitle(carro.nome);
                 }
             });
+
+            DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    switch (which){
+                        case DialogInterface.BUTTON_POSITIVE:
+                            // Clicou em Sim
+                            break;
+                        case DialogInterface.BUTTON_NEGATIVE:
+                            // Clicou em  Não
+                            break;
+                    }
+                }
+            };
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setMessage("Deletar esse carro?");
+            builder.setPositiveButton("Sim", dialogClickListener);
+            builder.setNegativeButton("Não", dialogClickListener);
+            builder.show();
+
+
             return true;
         } else if (item.getItemId() == R.id.action_remove) {
             //toast("Deletar: " + carro.nome);
