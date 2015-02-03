@@ -56,28 +56,6 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        /**
-         File file = SDCardUtils.getPrivateFile(this, "temp", "private.txt");
-         Log.d("livroandroid", "getPrivateFile: " + file);
-         SDCardUtils.write(file, "Ricardo");
-
-         file = SDCardUtils.getPublicFile("temp", "public.txt");
-         Log.d("livroandroid", "getPublicFile: " + file);
-         SDCardUtils.write(file, "Ricardo");
-
-         file = SDCardUtils.getPublicFileWithType("temp", "publicDCIM.txt", Environment.DIRECTORY_DCIM);
-         Log.d("livroandroid", "getPublicFileWithType: " + file);
-         SDCardUtils.write(file, "Ricardo");
-
-         file = SDCardUtils.getPublicFileWithType("temp", "publicDownload.txt", Environment.DIRECTORY_DOWNLOADS);
-         Log.d("livroandroid", "getPublicFileWithType: " + file);
-         SDCardUtils.write(file, "Ricardo");
-         */
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
