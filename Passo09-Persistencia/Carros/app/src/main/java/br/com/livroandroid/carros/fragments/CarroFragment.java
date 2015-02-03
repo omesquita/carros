@@ -39,7 +39,7 @@ public class CarroFragment extends BaseFragment {
                 @Override
                 public void onCarroUpdated(Carro carro) {
                     toast("Carro [" + carro.nome + "] atualizado.");
-                    CarrosApplication.getInstance().setNeedUpdateCarrosList(true);
+                    CarrosApplication.getInstance().setPrecisaAtualizar(carro.tipo,true);
                     // Atualiza o título com o novo nome
                     getActionBar().setTitle(carro.nome);
                 }
@@ -52,7 +52,7 @@ public class CarroFragment extends BaseFragment {
                 @Override
                 public void onCarroDeleted(Carro carro) {
                     toast("Carro [" + carro.nome + "] deletado.");
-                    CarrosApplication.getInstance().setNeedUpdateCarrosList(true);
+                    CarrosApplication.getInstance().setPrecisaAtualizar(carro.tipo,true);
                     // Fecha a activity
                     getActivity().finish();
                 }

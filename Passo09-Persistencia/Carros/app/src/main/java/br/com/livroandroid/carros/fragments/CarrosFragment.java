@@ -79,17 +79,11 @@ public class CarrosFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
 
-        if(CarrosApplication.getInstance().isNeedUpdateCarrosList()) {
+        if(CarrosApplication.getInstance().isPrecisaAtualizar(this.tipo)) {
             // Faz a leitura novamente do banco de dados
             taskCarros(false);
             toast("Lista de carros atualizada!");
         }
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        CarrosApplication.getInstance().setNeedUpdateCarrosList(false);
     }
 
     private void taskCarros(boolean refresh) {

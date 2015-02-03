@@ -5,13 +5,13 @@
         android:id="@+id/action_video"
         android:icon="@drawable/ic_action_video"
         android:title="Video"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/action_maps"
         android:icon="@drawable/ic_action_map"
         android:title="Maps"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/action_share"

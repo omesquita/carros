@@ -30,6 +30,9 @@ public class CarroService {
             List<Carro> carros = db.findAllByTipo(tipo);
             if (carros != null && carros.size() > 0) {
                 Log.d(TAG, "Retornando " + carros.size() + " carros [" + tipo + "] do banco");
+                for (Carro c: carros) {
+                    Log.d(TAG,c.nome + " - "  +c.tipo);
+                }
                 // Se existe retorna os carros salvos
                 return carros;
             }

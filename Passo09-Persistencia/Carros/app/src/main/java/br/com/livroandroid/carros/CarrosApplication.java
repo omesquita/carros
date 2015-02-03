@@ -3,6 +3,10 @@ package br.com.livroandroid.carros;
 import android.app.Application;
 import android.util.Log;
 
+import java.util.AbstractMap;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by Ricardo Lecheta on 24/01/2015.
  */
@@ -10,6 +14,7 @@ public class CarrosApplication extends Application {
     private static final String TAG = "CarrosApplication";
     // Singleton
     private static CarrosApplication instance = null;
+    private Map<String, Boolean> mapUpdate = new HashMap<String,Boolean>();
 
     public static CarrosApplication getInstance() {
         return instance;
@@ -30,11 +35,15 @@ public class CarrosApplication extends Application {
         Log.d(TAG, "CarrosApplication.onTerminate()");
     }
 
-    public void setNeedUpdateCarrosList(boolean needUpdateCarrosList) {
-        this.needUpdateCarrosList = needUpdateCarrosList;
+    public void setPrecisaAtualizar(String tipo, boolean b) {
+        this.mapUpdate.put(tipo,b);
     }
 
-    public boolean isNeedUpdateCarrosList() {
-        return this.needUpdateCarrosList;
+    public boolean isPrecisaAtualizar(String tipo) {
+        if(mapUpdate.containsKey(tipo)) {
+            boolean b = mapUpdate.remove(tipo);
+            return b;
+        }
+        return false;
     }
 }
