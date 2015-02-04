@@ -18,9 +18,11 @@ public class Carro implements Serializable {
     public String urlVideo;
     public String latitude;
     public String longitude;
+    // Flag para a action bar de contexto
+    public boolean selected;
 
     @Override
     public String toString() {
-        return "Carro{" + "nome='" + nome + '\'' + ", desc='" + desc + '\'' + '}';
+        return "Carro{" + "nome='" + nome + '}';
     }
 }

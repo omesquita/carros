@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.livroandroid.carros.CarrosApplication;
@@ -33,7 +34,7 @@ public class CarrosFragment extends BaseFragment {
     private String tipo;
     private SwipeRefreshLayout swipeLayout;
 
-    private ActionMode.Callback actionMode;
+    private ActionMode actionMode;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -96,7 +97,7 @@ public class CarrosFragment extends BaseFragment {
     private void taskCarros(boolean refresh) {
         recyclerView.setAdapter(null);
         // Busca os carros: Dispara a Task
-        if (AndroidUtils.isNetworkAvailable(getContext())) {
+        if (!refresh || AndroidUtils.isNetworkAvailable(getContext())) {
             startTask("carros", new GetCarrosTask(refresh), R.id.swipeToRefresh);
         } else {
             alert(R.string.error_conexao_indisponivel);
@@ -109,10 +110,17 @@ public class CarrosFragment extends BaseFragment {
             @Override
             public void onClickCarro(View view, int idx) {
                 Carro c = carros.get(idx);
-                //Toast.makeText(getContext(), "Carro: " + c.nome, Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getContext(), CarroActivity.class);
-                intent.putExtra("carro", c);
-                startActivity(intent);
+                if(actionMode == null) {
+                    //Toast.makeText(getContext(), "Carro: " + c.nome, Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getContext(), CarroActivity.class);
+                    intent.putExtra("carro", c);
+                    startActivity(intent);
+                } else {
+                    // Seleciona o carro
+                    c.selected = !c.selected;
+                    updateActionModeTitle();
+                    recyclerView.getAdapter().notifyDataSetChanged();
+                }
             }
 
             @Override
@@ -121,9 +129,14 @@ public class CarrosFragment extends BaseFragment {
                     return;
                 }
 
-                Carro c = carros.get(idx);
                 Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
-                toolbar.startActionMode(actionMode = getActionModeCallback());
+                actionMode = toolbar.startActionMode(getActionModeCallback());
+
+                Carro c = carros.get(idx);
+                c.selected = true;
+                recyclerView.getAdapter().notifyDataSetChanged();
+
+                updateActionModeTitle();
             }
         };
     }
@@ -132,7 +145,6 @@ public class CarrosFragment extends BaseFragment {
         return new ActionMode.Callback() {
             @Override
             public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-                toast("Boom!");
                 // Inflate a menu resource providing context menu items
                 MenuInflater inflater = mode.getMenuInflater();
                 inflater.inflate(R.menu.menu_frag_carros_context, menu);
@@ -149,14 +161,21 @@ public class CarrosFragment extends BaseFragment {
                 if (item.getItemId() == R.id.action_remove) {
                     toast("Remover");
                 }else if (item.getItemId() == R.id.action_share) {
-                    toast("Compartilhar");
+                    List<Carro> selectedCarros = getSelectedCarros();
+                    toast("Compartilhar: " + selectedCarros.toString());
                 }
+                // Encerra o action mode
+                mode.finish();
                 return true;
             }
 
             @Override
             public void onDestroyActionMode(ActionMode mode) {
                 actionMode = null;
+                for(Carro c : carros) {
+                    c.selected = false;
+                }
+                recyclerView.getAdapter().notifyDataSetChanged();
             }
         };
     }
@@ -194,6 +213,28 @@ public class CarrosFragment extends BaseFragment {
         @Override
         public void onCancelled(String s) {
 
+        }
+    }
+
+    private List<Carro> getSelectedCarros() {
+        List<Carro> list = new ArrayList<Carro>();
+        for(Carro c : carros) {
+            if(c.selected) {
+                list.add(c);
+            }
+        }
+        return list;
+    }
+
+    private void updateActionModeTitle() {
+        if(actionMode != null) {
+            actionMode.setTitle("Selecione os carros.");
+            List<Carro> selected = getSelectedCarros();
+            if(selected.size() == 1) {
+                actionMode.setSubtitle("1 carro selecionado");
+            } else if(selected.size() > 1) {
+                actionMode.setSubtitle(selected.size() + " carros selecionados");
+            }
         }
     }
 }

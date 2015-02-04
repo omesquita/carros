@@ -85,6 +85,13 @@ public class CarroAdapter extends RecyclerView.Adapter<CarroAdapter.CarrosViewHo
                 }
             });
         }
+
+        // Linha selecionada
+        if (c.selected) {
+            holder.itemView.setBackgroundResource(R.drawable.seletor_nav_drawer_selected);
+        } else {
+            holder.itemView.setBackground(null);
+        }
     }
 
     public interface CarroOnClickListener {
