@@ -7,7 +7,12 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.ActionMode;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -27,6 +32,8 @@ public class CarrosFragment extends BaseFragment {
     private LinearLayoutManager mLayoutManager;
     private String tipo;
     private SwipeRefreshLayout swipeLayout;
+
+    private ActionMode.Callback actionMode;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -110,8 +117,46 @@ public class CarrosFragment extends BaseFragment {
 
             @Override
             public void onLongClickCarro(View view, int idx) {
+                if (actionMode != null) {
+                    return;
+                }
+
                 Carro c = carros.get(idx);
-                toast("Clicou e segurou: " + c.nome);
+                Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+                toolbar.startActionMode(actionMode = getActionModeCallback());
+            }
+        };
+    }
+
+    private ActionMode.Callback getActionModeCallback() {
+        return new ActionMode.Callback() {
+            @Override
+            public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+                toast("Boom!");
+                // Inflate a menu resource providing context menu items
+                MenuInflater inflater = mode.getMenuInflater();
+                inflater.inflate(R.menu.menu_frag_carros_context, menu);
+                return true;
+            }
+
+            @Override
+            public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+                return true;
+            }
+
+            @Override
+            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+                if (item.getItemId() == R.id.action_remove) {
+                    toast("Remover");
+                }else if (item.getItemId() == R.id.action_share) {
+                    toast("Compartilhar");
+                }
+                return true;
+            }
+
+            @Override
+            public void onDestroyActionMode(ActionMode mode) {
+                actionMode = null;
             }
         };
     }
