@@ -3,12 +3,14 @@ package br.com.livroandroid.carros.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.view.MenuCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.view.ActionMode;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.view.ActionMode;
+import android.support.v7.widget.ShareActionProvider;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -35,6 +37,7 @@ public class CarrosFragment extends BaseFragment {
     private SwipeRefreshLayout swipeLayout;
 
     private ActionMode actionMode;
+    public Intent shareIntent;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -110,7 +113,7 @@ public class CarrosFragment extends BaseFragment {
             @Override
             public void onClickCarro(View view, int idx) {
                 Carro c = carros.get(idx);
-                if(actionMode == null) {
+                if (actionMode == null) {
                     //Toast.makeText(getContext(), "Carro: " + c.nome, Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getContext(), CarroActivity.class);
                     intent.putExtra("carro", c);
@@ -129,8 +132,8 @@ public class CarrosFragment extends BaseFragment {
                     return;
                 }
 
-                Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
-                actionMode = toolbar.startActionMode(getActionModeCallback());
+                //Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+                actionMode = getActionBarActivity().startSupportActionMode(getActionModeCallback());
 
                 Carro c = carros.get(idx);
                 c.selected = true;
@@ -143,12 +146,28 @@ public class CarrosFragment extends BaseFragment {
 
     private ActionMode.Callback getActionModeCallback() {
         return new ActionMode.Callback() {
+
             @Override
             public boolean onCreateActionMode(ActionMode mode, Menu menu) {
                 // Inflate a menu resource providing context menu items
-                MenuInflater inflater = mode.getMenuInflater();
+                MenuInflater inflater = getActivity().getMenuInflater();
                 inflater.inflate(R.menu.menu_frag_carros_context, menu);
+
+                MenuItem shareItem = menu.findItem(R.id.action_share);
+                ShareActionProvider share = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
+                toast("@@@> " + share);
+                share.setShareIntent(getDefaultIntent());
                 return true;
+            }
+
+            // Intent que define o conteúdo que será compartilhado
+
+            private Intent getDefaultIntent() {
+                shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/*");
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "Texto para compartilhar");
+                return shareIntent;
+
             }
 
             @Override
@@ -158,11 +177,11 @@ public class CarrosFragment extends BaseFragment {
 
             @Override
             public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+                List<Carro> selectedCarros = getSelectedCarros();
                 if (item.getItemId() == R.id.action_remove) {
-                    toast("Remover");
-                }else if (item.getItemId() == R.id.action_share) {
-                    List<Carro> selectedCarros = getSelectedCarros();
-                    toast("Compartilhar: " + selectedCarros.toString());
+                    toast("Remover " + selectedCarros);
+                } else if (item.getItemId() == R.id.action_share) {
+                    toast("Compartilhar: " + selectedCarros);
                 }
                 // Encerra o action mode
                 mode.finish();
@@ -172,7 +191,7 @@ public class CarrosFragment extends BaseFragment {
             @Override
             public void onDestroyActionMode(ActionMode mode) {
                 actionMode = null;
-                for(Carro c : carros) {
+                for (Carro c : carros) {
                     c.selected = false;
                 }
                 recyclerView.getAdapter().notifyDataSetChanged();
@@ -218,8 +237,8 @@ public class CarrosFragment extends BaseFragment {
 
     private List<Carro> getSelectedCarros() {
         List<Carro> list = new ArrayList<Carro>();
-        for(Carro c : carros) {
-            if(c.selected) {
+        for (Carro c : carros) {
+            if (c.selected) {
                 list.add(c);
             }
         }
@@ -227,13 +246,16 @@ public class CarrosFragment extends BaseFragment {
     }
 
     private void updateActionModeTitle() {
-        if(actionMode != null) {
+        if (actionMode != null) {
             actionMode.setTitle("Selecione os carros.");
-            List<Carro> selected = getSelectedCarros();
-            if(selected.size() == 1) {
+            List<Carro> selectedCarros = getSelectedCarros();
+            if (selectedCarros.size() == 1) {
                 actionMode.setSubtitle("1 carro selecionado");
-            } else if(selected.size() > 1) {
-                actionMode.setSubtitle(selected.size() + " carros selecionados");
+            } else if (selectedCarros.size() > 1) {
+                actionMode.setSubtitle(selectedCarros.size() + " carros selecionados");
+            }
+            if(shareIntent != null) {
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "Carros: " + selectedCarros);
             }
         }
     }

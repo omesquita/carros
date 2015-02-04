@@ -88,7 +88,7 @@ public class CarroAdapter extends RecyclerView.Adapter<CarroAdapter.CarrosViewHo
 
         // Linha selecionada
         if (c.selected) {
-            holder.itemView.setBackgroundResource(R.drawable.seletor_nav_drawer_selected);
+            holder.itemView.setBackgroundResource(R.drawable.seletor_contextual_action_bar);
         } else {
             holder.itemView.setBackground(null);
         }
