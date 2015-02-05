@@ -155,19 +155,12 @@ public class CarrosFragment extends BaseFragment {
 
                 MenuItem shareItem = menu.findItem(R.id.action_share);
                 ShareActionProvider share = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
-                toast("@@@> " + share);
-                share.setShareIntent(getDefaultIntent());
-                return true;
-            }
 
-            // Intent que define o conteúdo que será compartilhado
-
-            private Intent getDefaultIntent() {
                 shareIntent = new Intent(Intent.ACTION_SEND);
                 shareIntent.setType("text/*");
                 shareIntent.putExtra(Intent.EXTRA_TEXT, "Texto para compartilhar");
-                return shareIntent;
-
+                share.setShareIntent(shareIntent);
+                return true;
             }
 
             @Override
@@ -254,9 +247,13 @@ public class CarrosFragment extends BaseFragment {
             } else if (selectedCarros.size() > 1) {
                 actionMode.setSubtitle(selectedCarros.size() + " carros selecionados");
             }
-            if(shareIntent != null) {
-                shareIntent.putExtra(Intent.EXTRA_TEXT, "Carros: " + selectedCarros);
-            }
+            updateShareIntent(selectedCarros);
+        }
+    }
+
+    private void updateShareIntent(List<Carro> selectedCarros) {
+        if(shareIntent != null) {
+            shareIntent.putExtra(Intent.EXTRA_TEXT, "Carros: " + selectedCarros);
         }
     }
 }
