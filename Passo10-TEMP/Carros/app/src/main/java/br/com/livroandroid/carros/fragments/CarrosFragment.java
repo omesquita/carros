@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +30,8 @@ import br.com.livroandroid.carros.domain.Carro;
 import br.com.livroandroid.carros.domain.CarroDB;
 import br.com.livroandroid.carros.domain.CarroService;
 import livroandroid.lib.utils.AndroidUtils;
+import livroandroid.lib.utils.IOUtils;
+import livroandroid.lib.utils.SDCardUtils;
 
 public class CarrosFragment extends BaseFragment {
     protected RecyclerView recyclerView;
@@ -100,12 +103,12 @@ public class CarrosFragment extends BaseFragment {
     private void taskCarros(boolean refresh) {
         recyclerView.setAdapter(null);
         // Busca os carros: Dispara a Task
-        if (AndroidUtils.isNetworkAvailable(getContext())) {
+        //if (AndroidUtils.isNetworkAvailable(getContext())) {
             startTask("carros", new GetCarrosTask(refresh), R.id.swipeToRefresh);
-        } else {
-            alert(R.string.error_conexao_indisponivel);
-            swipeLayout.setRefreshing(false);
-        }
+        //} else {
+          //  alert(R.string.error_conexao_indisponivel);
+            //swipeLayout.setRefreshing(false);
+        //}
     }
 
     private CarroAdapter.CarroOnClickListener onClickCarro() {
@@ -192,17 +195,31 @@ public class CarrosFragment extends BaseFragment {
     }
     // Atualiza a share intent com os carros selecionados
     private void updateShareIntent(List<Carro> selectedCarros) {
-        if(shareIntent != null) {
-            // Texto com os carros
-            shareIntent.putExtra(Intent.EXTRA_TEXT, "Carros: " + selectedCarros);
+        ArrayList<Uri> imageUris = new ArrayList<Uri>();
+        for (Carro c: selectedCarros) {
+            if(c.urlFotoUri != null) {
+                imageUris.add(Uri.parse(c.urlFotoUri));
+            }
         }
+        /*
+        // Texto com os carros
+        shareIntent.putExtra(Intent.EXTRA_TEXT, "Carros: " + selectedCarros);
+        // Fotos dos carros
+        shareIntent.setAction(Intent.ACTION_SEND_MULTIPLE);
+        shareIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, imageUris);
+        shareIntent.setType("image/*");
+        */
+
     }
     // Retorna a lista de caros selecionados
     private List<Carro> getSelectedCarros() {
         List<Carro> list = new ArrayList<Carro>();
         for (Carro c : carros) {
-            if (c.selected) { list.add(c); }
+            if (c.selected) {
+                list.add(c);
+            }
         }
+        log(list.size() + " carros selecionados");
         return list;
     }
 
@@ -214,12 +231,13 @@ public class CarrosFragment extends BaseFragment {
                 MenuInflater inflater = getActivity().getMenuInflater();
                 inflater.inflate(R.menu.menu_frag_carros_context, menu);
                 MenuItem shareItem = menu.findItem(R.id.action_share);
-                ShareActionProvider share = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
+
+                /*ShareActionProvider share = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
 
                 shareIntent = new Intent(Intent.ACTION_SEND);
                 shareIntent.setType("text/*");
                 shareIntent.putExtra(Intent.EXTRA_TEXT, "Texto para compartilhar");
-                share.setShareIntent(shareIntent);
+                share.setShareIntent(shareIntent);*/
                 return true;
             }
             @Override
@@ -245,6 +263,8 @@ public class CarrosFragment extends BaseFragment {
                     toast("Carros excluídos com sucesso");
                 } else if (item.getItemId() == R.id.action_share) {
                     toast("Compartilhar: " + selectedCarros);
+
+                    startTask("compartilhar",new CompartilharTask(selectedCarros));
                 }
                 // Encerra o action mode
                 mode.finish();
@@ -263,4 +283,39 @@ public class CarrosFragment extends BaseFragment {
         };
     }
 
+    private class CompartilharTask extends BaseTask {
+        ArrayList<Uri> imageUris = new ArrayList<Uri>();
+        private final List<Carro> selectedCarros;
+
+        public CompartilharTask(List<Carro> selectedCarros) {
+            this.selectedCarros = selectedCarros;
+        }
+
+        @Override
+        public Object execute() throws Exception {
+            if(selectedCarros != null) {
+                for (Carro c : selectedCarros) {
+                    // Faz o download da foto do carro para arquivo
+                    String url = c.urlFoto;
+                    String fileName = url.substring(url.lastIndexOf("/"));
+                    // Cria o arquivo no sdcard
+                    File file = SDCardUtils.getPrivateFile(getContext(),"carros",fileName);
+                    IOUtils.downloadToFile(c.urlFoto,file);
+                    // Salva a Uri para compartilhar a foto
+                    imageUris.add(Uri.fromFile(file));
+                }
+            }
+            return null;
+        }
+        @Override
+        public void updateView(Object o) {
+            Intent shareIntent = new Intent();
+            shareIntent.setAction(Intent.ACTION_SEND);
+            // Fotos dos carros
+            shareIntent.setAction(Intent.ACTION_SEND_MULTIPLE);
+            shareIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, imageUris);
+            shareIntent.setType("image/*");
+            startActivity(Intent.createChooser(shareIntent, "Enviar Carros"));
+        }
+    }
 }

@@ -19,10 +19,13 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 import br.com.livroandroid.carros.R;
 import br.com.livroandroid.carros.domain.Carro;
+import livroandroid.lib.utils.DownloadUtil;
 import livroandroid.lib.utils.IOUtils;
 import livroandroid.lib.utils.SDCardUtils;
 
@@ -80,21 +83,15 @@ public class CarroAdapter extends RecyclerView.Adapter<CarroAdapter.CarrosViewHo
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        Log.d(TAG, "onBitmapLoaded.run: " + c.urlFoto);
-
-                        // Cria um arquivo em /storage/sdcard
-                        File file = SDCardUtils.getPublicFileWithType("carros", c.nome + ".png", Environment.DIRECTORY_PICTURES);
-                        Log.d(TAG,"File: " + file);
-
-                        c.urlFotoUri = Uri.fromFile(file).toString();
-
-                        // Salva o arquivo
-                        IOUtils.writeBitmap(file, bitmap);
-
+                        IOUtils.saveBitmapToFile("carros",c.urlFoto,bitmap,new IOUtils.Callback() {
+                            @Override
+                            public void onFileSaved(File file, boolean exists) {
+                                c.urlFotoUri = Uri.fromFile(file).toString();
+                            }
+                        });
                     }
                 }).start();
             }
-
             @Override
             public void onError() {
                 holder.progress.setVisibility(View.GONE);
@@ -119,8 +116,11 @@ public class CarroAdapter extends RecyclerView.Adapter<CarroAdapter.CarrosViewHo
         }
 
         // Pinta de azul se a linha estiver selecionada
-        int color = context.getResources().getColor(c.selected ? R.color.primary : R.color.white);
-        holder.itemView.setBackgroundColor(color);
+        int corFundo = context.getResources().getColor(c.selected ? R.color.primary : R.color.white);
+        holder.cardView.setCardBackgroundColor(corFundo);
+        // A cor do texto é branca ou azul, depende da cor do fundo
+        int corFonte = context.getResources().getColor(c.selected ? R.color.white : R.color.primary);
+        holder.tNome.setTextColor(corFonte);
     }
 
     public interface CarroOnClickListener {
@@ -133,6 +133,7 @@ public class CarroAdapter extends RecyclerView.Adapter<CarroAdapter.CarrosViewHo
         public TextView tNome;
         ImageView img;
         ProgressBar progress;
+        CardView cardView;
 
         public CarrosViewHolder(View view) {
             super(view);
@@ -140,6 +141,7 @@ public class CarroAdapter extends RecyclerView.Adapter<CarroAdapter.CarrosViewHo
             tNome = (TextView) view.findViewById(R.id.text);
             img = (ImageView) view.findViewById(R.id.img);
             progress = (ProgressBar) view.findViewById(R.id.progressImg);
+            cardView = (CardView) view.findViewById(R.id.card_view);
         }
     }
 }

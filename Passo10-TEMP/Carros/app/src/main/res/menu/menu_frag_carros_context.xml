@@ -6,8 +6,15 @@
         android:icon="@drawable/ic_action_share"
         android:title="Share"
         app:showAsAction="ifRoom"
+         />
+<!--
+    <item
+        android:id="@+id/action_share"
+        android:icon="@drawable/ic_action_share"
+        android:title="Share"
+        app:showAsAction="ifRoom"
         app:actionProviderClass="android.support.v7.widget.ShareActionProvider" />
-
+-->
     <item
         android:id="@+id/action_remove"
         android:icon="@android:drawable/ic_menu_delete"

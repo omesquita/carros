@@ -88,7 +88,7 @@ public class CarroAdapter extends RecyclerView.Adapter<CarroAdapter.CarrosViewHo
 
         // Pinta de azul se a linha estiver selecionada
         int corFundo = context.getResources().getColor(c.selected ? R.color.primary : R.color.white);
-        holder.itemView.setBackgroundColor(corFundo);
+        holder.cardView.setCardBackgroundColor(corFundo);
         // A cor do texto é branca ou azul, depende da cor do fundo
         int corFonte = context.getResources().getColor(c.selected ? R.color.white : R.color.primary);
         holder.tNome.setTextColor(corFonte);
@@ -104,6 +104,7 @@ public class CarroAdapter extends RecyclerView.Adapter<CarroAdapter.CarrosViewHo
         public TextView tNome;
         ImageView img;
         ProgressBar progress;
+        CardView cardView;
 
         public CarrosViewHolder(View view) {
             super(view);
@@ -111,6 +112,7 @@ public class CarroAdapter extends RecyclerView.Adapter<CarroAdapter.CarrosViewHo
             tNome = (TextView) view.findViewById(R.id.text);
             img = (ImageView) view.findViewById(R.id.img);
             progress = (ProgressBar) view.findViewById(R.id.progressImg);
+            cardView = (CardView) view.findViewById(R.id.card_view);
         }
     }
 }
