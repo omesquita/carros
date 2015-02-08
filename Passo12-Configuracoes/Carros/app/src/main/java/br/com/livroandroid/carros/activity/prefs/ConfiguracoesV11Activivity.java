@@ -1,17 +1,15 @@
 package br.com.livroandroid.carros.activity.prefs;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceFragment;
-import android.support.v7.app.ActionBarActivity;
 import android.widget.Toast;
 
 import br.com.livroandroid.carros.R;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-public class ConfiguracoesV11Activivity extends Activity {
+public class ConfiguracoesV11Activivity extends android.app.Activity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -19,11 +17,13 @@ public class ConfiguracoesV11Activivity extends Activity {
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
-        getFragmentManager().beginTransaction()
-                .replace(android.R.id.content, new PrefsFragment())
-                .commit();
+        // Adiciona o fragment de configurações
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.replace(android.R.id.content, new PrefsFragment());
+        ft.commit();
 
-        Toast.makeText(this, " isCheckPushOn: " + PrefsUtils.isCheckPushOn(this), Toast.LENGTH_SHORT).show();
+        boolean b = PrefsUtils.isCheckPushOn(this);
+        Toast.makeText(this, " isCheckPushOn: " + b, Toast.LENGTH_SHORT).show();
     }
 
     public static class PrefsFragment extends android.preference.PreferenceFragment {
@@ -32,7 +32,7 @@ public class ConfiguracoesV11Activivity extends Activity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
 
-            // Load the preferences from an XML resource
+            // Carrega as configurações
             addPreferencesFromResource(R.xml.preferences);
         }
     }

@@ -1,17 +1,18 @@
 package br.com.livroandroid.carros.activity.prefs;
 
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
 import android.widget.Toast;
 
 import br.com.livroandroid.carros.R;
 
-@SuppressWarnings("ALL")
-public class ConfiguracoesActivivity extends PreferenceActivity {
+@SuppressWarnings("deprecation")
+public class ConfiguracoesActivivity extends android.preference.PreferenceActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Carrega as configurações
         addPreferencesFromResource(R.xml.preferences);
 
         Toast.makeText(this, "isCheckPushOn: " + PrefsUtils.isCheckPushOn(this), Toast.LENGTH_SHORT).show();

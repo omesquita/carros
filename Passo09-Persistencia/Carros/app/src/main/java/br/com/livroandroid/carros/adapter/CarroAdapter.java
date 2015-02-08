@@ -77,19 +77,11 @@ public class CarroAdapter extends RecyclerView.Adapter<CarroAdapter.CarrosViewHo
                     carroOnClickListener.onClickCarro(holder.itemView, position); // A variável position é final
                 }
             });
-            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    carroOnClickListener.onLongClickCarro(holder.itemView, position); // A variável position é final
-                    return true;
-                }
-            });
         }
     }
 
     public interface CarroOnClickListener {
         public void onClickCarro(View view, int idx);
-        public void onLongClickCarro(View view, int idx);
     }
 
     // ViewHolder com as views

@@ -119,9 +119,10 @@ public class CarrosFragment extends BaseFragment {
                     intent.putExtra("carro", c);
                     startActivity(intent);
                 } else {
-                    // Seleciona o carro
-                    c.selected = !c.selected;
+                    // Atualiza o título da CAB
                     updateActionModeTitle();
+                    // Seleciona o carro e redesenha o RecyclerView
+                    c.selected = !c.selected;
                     recyclerView.getAdapter().notifyDataSetChanged();
                 }
             }
@@ -132,7 +133,6 @@ public class CarrosFragment extends BaseFragment {
                     return;
                 }
 
-                //Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
                 actionMode = getActionBarActivity().startSupportActionMode(getActionModeCallback());
 
                 Carro c = carros.get(idx);
@@ -149,7 +149,7 @@ public class CarrosFragment extends BaseFragment {
 
             @Override
             public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-                // Inflate a menu resource providing context menu items
+                // Infla o menu específico da action bar de contexto (CAB)
                 MenuInflater inflater = getActivity().getMenuInflater();
                 inflater.inflate(R.menu.menu_frag_carros_context, menu);
 
@@ -183,7 +183,9 @@ public class CarrosFragment extends BaseFragment {
 
             @Override
             public void onDestroyActionMode(ActionMode mode) {
+                // Limpa o estado
                 actionMode = null;
+                // Configura todos os carros para não selecionados
                 for (Carro c : carros) {
                     c.selected = false;
                 }
@@ -228,16 +230,7 @@ public class CarrosFragment extends BaseFragment {
         }
     }
 
-    private List<Carro> getSelectedCarros() {
-        List<Carro> list = new ArrayList<Carro>();
-        for (Carro c : carros) {
-            if (c.selected) {
-                list.add(c);
-            }
-        }
-        return list;
-    }
-
+    // Atualiza o título da action bar (CAB)
     private void updateActionModeTitle() {
         if (actionMode != null) {
             actionMode.setTitle("Selecione os carros.");
@@ -249,6 +242,17 @@ public class CarrosFragment extends BaseFragment {
             }
             updateShareIntent(selectedCarros);
         }
+    }
+
+    // Retorna a lista de carros selecionados
+    private List<Carro> getSelectedCarros() {
+        List<Carro> list = new ArrayList<Carro>();
+        for (Carro c : carros) {
+            if (c.selected) {
+                list.add(c);
+            }
+        }
+        return list;
     }
 
     private void updateShareIntent(List<Carro> selectedCarros) {

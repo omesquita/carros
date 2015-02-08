@@ -29,7 +29,7 @@ public class CarroService {
             // Consulta no banco de dados
             List<Carro> carros = db.findAllByTipo(tipo);
             if (carros != null && carros.size() > 0) {
-                Log.d(TAG, "Retornando " + carros.size() + " carros [" + tipo + "] do banco");
+                Log.d(TAG, "Carros do tipo[" + tipo + "] encontrados do banco.");
                 for (Carro c: carros) {
                     Log.d(TAG,c.nome + " - "  +c.tipo);
                 }
@@ -40,7 +40,8 @@ public class CarroService {
 
         // Caso não existe no banco de dados busca no web service
         String url = URL.replace("{tipo}", tipo);
-        Log.d(TAG, "Carros [" + tipo + "]: " + url);
+        Log.d(TAG, "Carros do tipo [\" + tipo + \"] não encontrados no banco, buscando no web service." );
+        Log.d(TAG,"URL: " + url);
         String json = HttpHelper.doGet(url);
         List<Carro> carros = parserJSON(context, json);
 
@@ -50,6 +51,7 @@ public class CarroService {
         // Salva todos os carros
         for (Carro c : carros) {
             c.tipo = tipo;
+            Log.d(TAG, "Salvando o carro " + c.nome);
             db.save(c);
         }
 

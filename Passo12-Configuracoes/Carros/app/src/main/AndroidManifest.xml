@@ -34,21 +34,16 @@
 
         <activity
             android:name=".activity.prefs.ConfiguracoesActivivity"
-            android:label="@string/title_activity_configuracoes_activivity"
-            android:parentActivityName=".activity.MainActivity">
+            android:label="@string/title_activity_configuracoes_activivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="br.com.livroandroid.carros.activity.MainActivity" />
+                android:value=".activity.MainActivity" />
         </activity>
         <activity
             android:name=".activity.prefs.ConfiguracoesV11Activivity"
             android:label="@string/title_activity_configuracoes_activivity"
             android:parentActivityName=".activity.MainActivity"
-            android:theme="@style/AppThemeMaterial">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="br.com.livroandroid.carros.activity.MainActivity" />
-        </activity>
+            android:theme="@style/AppTheme.Material" />
 
     </application>
 

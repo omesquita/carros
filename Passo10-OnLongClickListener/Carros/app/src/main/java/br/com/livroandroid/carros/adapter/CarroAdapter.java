@@ -86,12 +86,12 @@ public class CarroAdapter extends RecyclerView.Adapter<CarroAdapter.CarrosViewHo
             });
         }
 
-        // Linha selecionada
-        if (c.selected) {
-            holder.itemView.setBackgroundResource(R.drawable.seletor_contextual_action_bar);
-        } else {
-            holder.itemView.setBackground(null);
-        }
+        // Pinta de azul se a linha estiver selecionada
+        int corFundo = context.getResources().getColor(c.selected ? R.color.primary : R.color.white);
+        holder.itemView.setBackgroundColor(corFundo);
+        // A cor do texto é branca ou azul, depende da cor do fundo
+        int corFonte = context.getResources().getColor(c.selected ? R.color.white : R.color.primary);
+        holder.tNome.setTextColor(corFonte);
     }
 
     public interface CarroOnClickListener {

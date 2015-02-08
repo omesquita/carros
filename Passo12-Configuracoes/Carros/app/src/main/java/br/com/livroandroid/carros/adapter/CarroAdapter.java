@@ -65,7 +65,7 @@ public class CarroAdapter extends RecyclerView.Adapter<CarroAdapter.CarrosViewHo
         holder.tNome.setText(c.nome);
         holder.progress.setVisibility(View.VISIBLE);
 
-        Picasso.with(context).load(c.urlFoto).fit().into(holder.img, new Callback() {
+        Picasso.with(context).load(c.urlFoto).fit().into(holder.img, new com.squareup.picasso.Callback() {
             @Override
             public void onSuccess() {
                 holder.progress.setVisibility(View.GONE);

@@ -9,7 +9,7 @@
     </style>
 
     <!-- Tema material para a tela de configurações -->
-    <style name="AppThemeMaterial" parent="android:Theme.Material.Light.DarkActionBar">
+    <style name="AppTheme.Material" parent="android:Theme.Material.Light.DarkActionBar">
         <!--   Cor primária do aplicativo -->
         <item name="android:colorPrimary">@color/primary</item>
         <!--   Variação escura da cor primária para a status bar e contextual app bars -->

@@ -4,8 +4,6 @@ package br.com.livroandroid.carros.domain;
  * Created by Ricardo Lecheta on 06/11/2014.
  */
 
-import android.net.Uri;
-
 import java.io.Serializable;
 
 public class Carro implements Serializable {
@@ -27,6 +25,6 @@ public class Carro implements Serializable {
 
     @Override
     public String toString() {
-        return "Carro{" + "nome='" + nome + '}';
+        return "Carro{" + "nome='" + nome + '\'' + '}';
     }
 }

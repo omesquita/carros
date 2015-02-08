@@ -1,0 +1,9 @@
+R:\Java\workspaces\workspace-studio-temp\Carros-Step-By-Step\Passo09-Persistencia\Carros\app\build\intermediates\classes\debug
+R:\Java\workspaces\workspace-studio-temp\Carros-Step-By-Step\Passo09-Persistencia\Carros\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-de2031313ff71a57e4efaf0063328fd47a155972.jar
+R:\Java\workspaces\workspace-studio-temp\Carros-Step-By-Step\Passo09-Persistencia\Carros\app\build\intermediates\pre-dexed\debug\classes-a066ab3deefe4ca7d2797179104534686db91e9c.jar
+R:\Java\workspaces\workspace-studio-temp\Carros-Step-By-Step\Passo09-Persistencia\Carros\app\build\intermediates\pre-dexed\debug\classes-bc003529715de38043ecc3c766a80862bcd5b67a.jar
+R:\Java\workspaces\workspace-studio-temp\Carros-Step-By-Step\Passo09-Persistencia\Carros\app\build\intermediates\pre-dexed\debug\picasso-2.4.0-ebf9e2f304c714c7356a5b07eb82340c7e031d69.jar
+R:\Java\workspaces\workspace-studio-temp\Carros-Step-By-Step\Passo09-Persistencia\Carros\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-636cf23439422201bd389f0f8f09c32caea9309a.jar
+R:\Java\workspaces\workspace-studio-temp\Carros-Step-By-Step\Passo09-Persistencia\Carros\app\build\intermediates\pre-dexed\debug\classes-6b3388363dd75cbb1ba52de3dff0b020143074ee.jar
+R:\Java\workspaces\workspace-studio-temp\Carros-Step-By-Step\Passo09-Persistencia\Carros\app\build\intermediates\pre-dexed\debug\classes-83c8c59a8296c743ac2a6c327910db2ef1b9cd46.jar
+R:\Java\workspaces\workspace-studio-temp\Carros-Step-By-Step\Passo09-Persistencia\Carros\app\build\intermediates\pre-dexed\debug\classes-ea1d2772f4ff4877624e22e6a1da0eb2b592a8c9.jar

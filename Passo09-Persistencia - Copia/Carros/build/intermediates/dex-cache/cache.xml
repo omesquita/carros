@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="R:\Java\workspaces\workspace-studio-temp\Carros-Step-By-Step\Passo09-Persistencia\Carros\app\build\intermediates\exploded-aar\br.com.livroandroid\android-utils\0.0.5\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="5b9b20a07792b53c63f5cfb388a6bd848e5bd97e">
+        <dex dex="R:\Java\workspaces\workspace-studio-temp\Carros-Step-By-Step\Passo09-Persistencia\Carros\app\build\intermediates\pre-dexed\debug\classes-bc003529715de38043ecc3c766a80862bcd5b67a.jar" />
+    </item>
+    <item
+        jar="C:\Users\Ricardo Lecheta\.gradle\caches\modules-2\files-2.1\com.squareup.picasso\picasso\2.4.0\f36d2d4e3a36b3259aaf9d004d29b4cdc6c1bfb2\picasso-2.4.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="f36d2d4e3a36b3259aaf9d004d29b4cdc6c1bfb2">
+        <dex dex="R:\Java\workspaces\workspace-studio-temp\Carros-Step-By-Step\Passo08-WebService-XML\Carros\app\build\intermediates\pre-dexed\debug\picasso-2.4.0-ebf9e2f304c714c7356a5b07eb82340c7e031d69.jar" />
+    </item>
+    <item
+        jar="R:\Java\workspaces\workspace-studio-temp\Carros-Step-By-Step\Passo09-Persistencia\Carros\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.3\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="R:\Java\workspaces\workspace-studio-temp\Carros-Step-By-Step\Passo09-Persistencia\Carros\app\build\intermediates\pre-dexed\debug\classes-83c8c59a8296c743ac2a6c327910db2ef1b9cd46.jar" />
+    </item>
+    <item
+        jar="R:\Java\workspaces\workspace-studio-temp\Carros-Step-By-Step\Passo09-Persistencia\Carros\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="R:\Java\workspaces\workspace-studio-temp\Carros-Step-By-Step\Passo09-Persistencia\Carros\app\build\intermediates\pre-dexed\debug\classes-ea1d2772f4ff4877624e22e6a1da0eb2b592a8c9.jar" />
+    </item>
+    <item
+        jar="R:\Java\workspaces\workspace-studio-temp\Carros-Step-By-Step\Passo08-WebService-XML\Carros\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="R:\Java\workspaces\workspace-studio-temp\Carros-Step-By-Step\Passo08-WebService-XML\Carros\app\build\intermediates\pre-dexed\debug\classes-fa96f48540063296c82792a17971484ed6986233.jar" />
+    </item>
+    <item
+        jar="R:\Java\workspaces\workspace-studio-temp\Carros-Step-By-Step\Passo08-WebService-XML\Carros\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\21.0.3\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b8945fc23a7461c6fdde15753456d64b0a9358b">
+        <dex dex="R:\Java\workspaces\workspace-studio-temp\Carros-Step-By-Step\Passo08-WebService-XML\Carros\app\build\intermediates\pre-dexed\debug\classes-db7037998abf9a7976a6b7bad1c7f0c8c3ab2b8b.jar" />
+    </item>
+    <item
+        jar="R:\Java\workspaces\workspace-studio-temp\Carros-Step-By-Step\Passo09-Persistencia\Carros\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\21.0.3\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b8945fc23a7461c6fdde15753456d64b0a9358b">
+        <dex dex="R:\Java\workspaces\workspace-studio-temp\Carros-Step-By-Step\Passo09-Persistencia\Carros\app\build\intermediates\pre-dexed\debug\classes-6b3388363dd75cbb1ba52de3dff0b020143074ee.jar" />
+    </item>
+    <item
+        jar="R:\Java\workspaces\workspace-studio-temp\Carros-Step-By-Step\Passo08-WebService-XML\Carros\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.3\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="R:\Java\workspaces\workspace-studio-temp\Carros-Step-By-Step\Passo08-WebService-XML\Carros\app\build\intermediates\pre-dexed\debug\classes-7887d01530b201d486de6b562b2039ba17d97694.jar" />
+    </item>
+    <item
+        jar="C:\Users\Ricardo Lecheta\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.3\support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="R:\Java\workspaces\workspace-studio-temp\Carros-Step-By-Step\Passo08-WebService-XML\Carros\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-de2031313ff71a57e4efaf0063328fd47a155972.jar" />
+    </item>
+    <item
+        jar="R:\Java\workspaces\workspace-studio-temp\Carros-Step-By-Step\Passo09-Persistencia\Carros\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\libs\internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="R:\Java\workspaces\workspace-studio-temp\Carros-Step-By-Step\Passo09-Persistencia\Carros\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-636cf23439422201bd389f0f8f09c32caea9309a.jar" />
+    </item>
+    <item
+        jar="R:\Java\workspaces\workspace-studio-temp\Carros-Step-By-Step\Passo08-WebService-XML\Carros\app\build\intermediates\exploded-aar\com.android.support\cardview-v7\21.0.3\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="00b0b7233e1ec64acebfac40d4983d32d4712426">
+        <dex dex="R:\Java\workspaces\workspace-studio-temp\Carros-Step-By-Step\Passo08-WebService-XML\Carros\app\build\intermediates\pre-dexed\debug\classes-a62206c2b6fd4fd97e323480a7b64c1e89e9e2b5.jar" />
+    </item>
+    <item
+        jar="R:\Java\workspaces\workspace-studio-temp\Carros-Step-By-Step\Passo08-WebService-XML\Carros\app\build\intermediates\exploded-aar\br.com.livroandroid\android-utils\0.0.5\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="215235a3f56ea746ea1c788055d837c4bd1fe6be">
+        <dex dex="R:\Java\workspaces\workspace-studio-temp\Carros-Step-By-Step\Passo08-WebService-XML\Carros\app\build\intermediates\pre-dexed\debug\classes-89465efc09fa10a1133d2ae783b923691cdf378f.jar" />
+    </item>
+    <item
+        jar="R:\Java\workspaces\workspace-studio-temp\Carros-Step-By-Step\Passo09-Persistencia\Carros\app\build\intermediates\exploded-aar\com.android.support\cardview-v7\21.0.3\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="00b0b7233e1ec64acebfac40d4983d32d4712426">
+        <dex dex="R:\Java\workspaces\workspace-studio-temp\Carros-Step-By-Step\Passo09-Persistencia\Carros\app\build\intermediates\pre-dexed\debug\classes-a066ab3deefe4ca7d2797179104534686db91e9c.jar" />
+    </item>
+    <item
+        jar="R:\Java\workspaces\workspace-studio-temp\Carros-Step-By-Step\Passo08-WebService-XML\Carros\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\libs\internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="R:\Java\workspaces\workspace-studio-temp\Carros-Step-By-Step\Passo08-WebService-XML\Carros\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-00c5a2bd7648d5f5429145285ee8dffed50bee15.jar" />
+    </item>
+
+</items>
