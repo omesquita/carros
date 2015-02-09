@@ -21,7 +21,7 @@ public class Carro implements Serializable {
     // Flag para a action bar de contexto
     public boolean selected;
     // Local do arquivo onde a foto foi salva
-    public String urlFotoUri;
+    //public String urlFotoUri;
 
     @Override
     public String toString() {

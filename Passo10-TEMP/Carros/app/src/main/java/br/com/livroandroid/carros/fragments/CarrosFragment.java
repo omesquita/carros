@@ -190,26 +190,7 @@ public class CarrosFragment extends BaseFragment {
             } else if (selectedCarros.size() > 1) {
                 actionMode.setSubtitle(selectedCarros.size() + " carros selecionados");
             }
-            updateShareIntent(selectedCarros);
         }
-    }
-    // Atualiza a share intent com os carros selecionados
-    private void updateShareIntent(List<Carro> selectedCarros) {
-        ArrayList<Uri> imageUris = new ArrayList<Uri>();
-        for (Carro c: selectedCarros) {
-            if(c.urlFotoUri != null) {
-                imageUris.add(Uri.parse(c.urlFotoUri));
-            }
-        }
-        /*
-        // Texto com os carros
-        shareIntent.putExtra(Intent.EXTRA_TEXT, "Carros: " + selectedCarros);
-        // Fotos dos carros
-        shareIntent.setAction(Intent.ACTION_SEND_MULTIPLE);
-        shareIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, imageUris);
-        shareIntent.setType("image/*");
-        */
-
     }
     // Retorna a lista de caros selecionados
     private List<Carro> getSelectedCarros() {
@@ -283,7 +264,7 @@ public class CarrosFragment extends BaseFragment {
         };
     }
 
-    private class CompartilharTask extends BaseTask {
+    private class CompartilharTask extends BaseFragment.BaseTask {
         ArrayList<Uri> imageUris = new ArrayList<Uri>();
         private final List<Carro> selectedCarros;
 
@@ -309,12 +290,13 @@ public class CarrosFragment extends BaseFragment {
         }
         @Override
         public void updateView(Object o) {
+            // Cria a intent com a foto dos carros
             Intent shareIntent = new Intent();
             shareIntent.setAction(Intent.ACTION_SEND);
-            // Fotos dos carros
             shareIntent.setAction(Intent.ACTION_SEND_MULTIPLE);
             shareIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, imageUris);
             shareIntent.setType("image/*");
+            // Cria o Intent Chooser com as opções
             startActivity(Intent.createChooser(shareIntent, "Enviar Carros"));
         }
     }
