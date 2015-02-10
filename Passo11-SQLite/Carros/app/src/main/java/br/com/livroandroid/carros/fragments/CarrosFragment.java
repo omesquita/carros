@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.net.ConnectException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +30,7 @@ import br.com.livroandroid.carros.adapter.CarroAdapter;
 import br.com.livroandroid.carros.domain.Carro;
 import br.com.livroandroid.carros.domain.CarroDB;
 import br.com.livroandroid.carros.domain.CarroService;
+import br.com.livroandroid.carros.domain.exception.NetworkUnavailableException;
 import livroandroid.lib.utils.AndroidUtils;
 
 public class CarrosFragment extends BaseFragment {
@@ -72,7 +74,11 @@ public class CarrosFragment extends BaseFragment {
             @Override
             public void onRefresh() {
                 // Atualiza ao fazer o gesto Swipe To Refresh
-                taskCarros(true);
+                if(AndroidUtils.isNetworkAvailable(getContext())) {
+                    taskCarros(true);
+                } else {
+                    alert(R.string.error_conexao_indisponivel);
+                }
             }
         };
     }
@@ -96,15 +102,8 @@ public class CarrosFragment extends BaseFragment {
         }
     }
 
-    private void taskCarros(boolean refresh) {
-        recyclerView.setAdapter(null);
-        // Busca os carros: Dispara a Task
-        if (!refresh || AndroidUtils.isNetworkAvailable(getContext())) {
-            startTask("carros", new GetCarrosTask(refresh), R.id.swipeToRefresh);
-        } else {
-            alert(R.string.error_conexao_indisponivel);
-            swipeLayout.setRefreshing(false);
-        }
+    private void taskCarros(boolean pullToRefresh) {
+        startTask("carros", new GetCarrosTask(pullToRefresh), pullToRefresh ? R.id.swipeToRefresh : R.id.progress);
     }
 
     private CarroAdapter.CarroOnClickListener onClickCarro() {
@@ -130,7 +129,7 @@ public class CarrosFragment extends BaseFragment {
 
         @Override
         public List<Carro> execute() throws Exception {
-            Thread.sleep(200);
+            Thread.sleep(500);
             // Busca os carros em background (Thread)
             return CarroService.getCarros(getContext(), tipo, refresh);
         }

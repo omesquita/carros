@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.livroandroid.carros.domain.exception.NetworkUnavailableException;
 import livroandroid.lib.utils.HttpHelper;
 
 public class CarroService {
@@ -23,15 +24,15 @@ public class CarroService {
         return getCarros(context, tipo, false);
     }
 
-    public static List<Carro> getCarros(Context context, String tipo, boolean refresh) throws IOException {
+    public static List<Carro> getCarros(Context context, String tipo, boolean refresh) throws IOException, NetworkUnavailableException {
         CarroDB db = new CarroDB(context);
         if (!refresh) {
             // Consulta no banco de dados
             List<Carro> carros = db.findAllByTipo(tipo);
             if (carros != null && carros.size() > 0) {
                 Log.d(TAG, "Retornando " + carros.size() + " carros [" + tipo + "] do banco");
-                for (Carro c: carros) {
-                    Log.d(TAG,c.nome + " - "  +c.tipo);
+                for (Carro c : carros) {
+                    Log.d(TAG, c.nome + " - " + c.tipo);
                 }
                 // Se existe retorna os carros salvos
                 return carros;
