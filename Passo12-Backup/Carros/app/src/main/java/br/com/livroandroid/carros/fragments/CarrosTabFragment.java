@@ -1,7 +1,9 @@
 package br.com.livroandroid.carros.fragments;
 
+import android.app.backup.BackupManager;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,13 +21,21 @@ public class CarrosTabFragment extends BaseFragment {
 
     private SlidingTabLayout mSlidingTabLayout;
     private ViewPager viewPager;
+    private BackupManager backupManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_carros_tab, container, false);
+
+        // Gerenciador de backup
+        backupManager = new BackupManager(getContext());
+
+        // ViewPager
         viewPager = (ViewPager) view.findViewById(R.id.viewpager);
         viewPager.setOffscreenPageLimit(2);
         viewPager.setAdapter(new TabsAdapter(getContext(), getChildFragmentManager()));
+
+        // Tabs
         mSlidingTabLayout = (SlidingTabLayout) view.findViewById(R.id.sliding_tabs);
         mSlidingTabLayout.setCustomTabView(R.layout.tab_layout, R.id.tabText);
         // Deixa as tabs com mesmo tamanho (layout_weight=1)
@@ -43,6 +53,7 @@ public class CarrosTabFragment extends BaseFragment {
             public void onPageSelected(int position) {
                 // Salva o índice da página/tab selecionada
                 Prefs.setInteger(getContext(), "tabIdx", viewPager.getCurrentItem());
+                backupManager.dataChanged();
             }
 
             @Override
