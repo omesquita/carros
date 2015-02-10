@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.livroandroid.carros.domain.exception.NetworkUnavailableException;
 import livroandroid.lib.utils.HttpHelper;
 
 public class CarroService {
@@ -24,7 +23,7 @@ public class CarroService {
         return getCarros(context, tipo, false);
     }
 
-    public static List<Carro> getCarros(Context context, String tipo, boolean refresh) throws IOException, NetworkUnavailableException {
+    public static List<Carro> getCarros(Context context, String tipo, boolean refresh) throws IOException {
         CarroDB db = new CarroDB(context);
         if (!refresh) {
             // Consulta no banco de dados

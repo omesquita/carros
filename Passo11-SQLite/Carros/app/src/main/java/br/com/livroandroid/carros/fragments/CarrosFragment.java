@@ -1,26 +1,16 @@
 package br.com.livroandroid.carros.fragments;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.view.MenuCompat;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.view.ActionMode;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.ShareActionProvider;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.net.ConnectException;
-import java.util.ArrayList;
 import java.util.List;
 
 import br.com.livroandroid.carros.CarrosApplication;
@@ -28,9 +18,7 @@ import br.com.livroandroid.carros.R;
 import br.com.livroandroid.carros.activity.CarroActivity;
 import br.com.livroandroid.carros.adapter.CarroAdapter;
 import br.com.livroandroid.carros.domain.Carro;
-import br.com.livroandroid.carros.domain.CarroDB;
 import br.com.livroandroid.carros.domain.CarroService;
-import br.com.livroandroid.carros.domain.exception.NetworkUnavailableException;
 import livroandroid.lib.utils.AndroidUtils;
 
 public class CarrosFragment extends BaseFragment {
@@ -74,7 +62,7 @@ public class CarrosFragment extends BaseFragment {
             @Override
             public void onRefresh() {
                 // Atualiza ao fazer o gesto Swipe To Refresh
-                if(AndroidUtils.isNetworkAvailable(getContext())) {
+                if (AndroidUtils.isNetworkAvailable(getContext())) {
                     taskCarros(true);
                 } else {
                     alert(R.string.error_conexao_indisponivel);

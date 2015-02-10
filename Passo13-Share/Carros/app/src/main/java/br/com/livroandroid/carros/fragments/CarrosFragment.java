@@ -76,7 +76,11 @@ public class CarrosFragment extends BaseFragment {
             @Override
             public void onRefresh() {
                 // Atualiza ao fazer o gesto Swipe To Refresh
-                taskCarros(true);
+                if (AndroidUtils.isNetworkAvailable(getContext())) {
+                    taskCarros(true);
+                } else {
+                    alert(R.string.error_conexao_indisponivel);
+                }
             }
         };
     }
@@ -100,15 +104,8 @@ public class CarrosFragment extends BaseFragment {
         }
     }
 
-    private void taskCarros(boolean refresh) {
-        recyclerView.setAdapter(null);
-        // Busca os carros: Dispara a Task
-        if (!refresh || AndroidUtils.isNetworkAvailable(getContext())) {
-            startTask("carros", new GetCarrosTask(refresh), R.id.swipeToRefresh);
-        } else {
-            alert(R.string.error_conexao_indisponivel);
-            swipeLayout.setRefreshing(false);
-        }
+    private void taskCarros(boolean pullToRefresh) {
+        startTask("carros", new GetCarrosTask(pullToRefresh), pullToRefresh ? R.id.swipeToRefresh : R.id.progress);
     }
 
     private CarroAdapter.CarroOnClickListener onClickCarro() {
@@ -260,7 +257,7 @@ public class CarrosFragment extends BaseFragment {
     }
 
     // Task para fazer o download
-    private class CompartilharTask extends BaseFragment.BaseTask {
+    private class CompartilharTask implements TaskListener {
 
         // Lista de arquivos para compartilhar
         ArrayList<Uri> imageUris = new ArrayList<Uri>();
@@ -306,6 +303,16 @@ public class CarrosFragment extends BaseFragment {
             startActivity(Intent.createChooser(shareIntent, "Enviar Carros"));
 
             Log.d(TAG,"ShareIntent: " + imageUris);
+        }
+
+        @Override
+        public void onError(Exception e) {
+            alert("Ocorreu algum erro ao compartilhar.");
+        }
+
+        @Override
+        public void onCancelled(String s) {
+
         }
     }
 }
