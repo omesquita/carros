@@ -35,7 +35,7 @@ public class CarroAdapter extends RecyclerView.Adapter<CarroAdapter.CarrosViewHo
 
     @Override
     public int getItemCount() {
-        return this.carros.size();
+        return this.carros != null ? this.carros.size() : 0;
     }
 
     @Override
