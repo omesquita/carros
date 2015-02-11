@@ -1,0 +1,104 @@
+package br.com.livroandroid.carros.domain;
+
+import android.content.Context;
+import android.os.Environment;
+import android.util.Log;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import br.com.livroandroid.carros.R;
+import livroandroid.lib.utils.FIleUtils;
+import livroandroid.lib.utils.IOUtils;
+import livroandroid.lib.utils.PrefsFile;
+import livroandroid.lib.utils.SDCardUtils;
+
+public class CarroService {
+    private static final boolean LOG_ON = false;
+    private static final String TAG = "CarroService";
+
+    public static List<Carro> getCarros(Context context, String tipo) {
+        try {
+            String json = readFileFromTipo(context, tipo);
+
+            //salvaArquivoNaMemoriaInterna(context, tipo, json);
+            salvaArquivoNaMemoriaExterna(context, tipo, json);
+
+            List<Carro> carros = parserJSON(context, json);
+            return carros;
+        } catch (Exception e) {
+            // TODO explicar exception
+            Log.e(TAG, "Erro ao ler os carros: " + e.getMessage(), e);
+            return null;
+        }
+    }
+
+    /*
+    Salva o arquivo na memoria interna
+     */
+    private static void salvaArquivoNaMemoriaInterna(Context context, String tipo, String json) {
+        File f = FIleUtils.getPrivateFile(context, tipo + ".json");
+        IOUtils.writeString(f, json);
+        // Vai imprimir: Arquivo salvo: /data/data/br.com.livroandroid.carros/files/luxo.json
+        Log.d(TAG, "Arquivo salvo: " + f);
+    }
+
+    /*
+    Salva o arquivo na memoria externa
+     */
+    private static void salvaArquivoNaMemoriaExterna(Context context, String tipo, String json) {
+        // Vai imprimir: Arquivo salvo: /data/data/br.com.livroandroid.carros/files/luxo.json
+        File f = SDCardUtils.getPrivateFile(context, tipo + ".json", Environment.DIRECTORY_DOWNLOADS);
+        IOUtils.writeString(f, json);
+        Log.d(TAG, "1) Arquivo privado salvo: " + f);
+
+        // Vai imprimir: Arquivo salvo: /data/data/br.com.livroandroid.carros/files/luxo.json
+        f = SDCardUtils.getPublicFile(tipo + ".json", Environment.DIRECTORY_DOWNLOADS);
+        IOUtils.writeString(f, json);
+        Log.d(TAG, "2) Arquivo público salvo: " + f);
+    }
+
+    private static String readFileFromTipo(Context context, String tipo) throws IOException {
+        if ("classicos".equals(tipo)) {
+            return FIleUtils.readRawFileString(context, R.raw.carros_classicos, "UTF-8");
+        } else if ("esportivos".equals(tipo)) {
+            return FIleUtils.readRawFileString(context, R.raw.carros_esportivos, "UTF-8");
+        }
+        return FIleUtils.readRawFileString(context, R.raw.carros_luxo, "UTF-8");
+    }
+
+    private static List<Carro> parserJSON(Context context, String json) throws IOException {
+        List<Carro> carros = new ArrayList<Carro>();
+        try {
+            JSONObject root = new JSONObject(json);
+            JSONObject obj = root.getJSONObject("carros");
+            JSONArray jsonCarros = obj.getJSONArray("carro");
+            // Insere cada carro na lista
+            for (int i = 0; i < jsonCarros.length(); i++) {
+                JSONObject jsonCarro = jsonCarros.getJSONObject(i);
+                Carro c = new Carro();
+                // Lê as informações de cada carro
+                c.nome = jsonCarro.optString("nome");
+                c.desc = jsonCarro.optString("desc");
+                c.urlFoto = jsonCarro.optString("url_foto");
+                c.urlInfo = jsonCarro.optString("url_info");
+                if (LOG_ON) {
+                    Log.d(TAG, "Carro " + c.nome + " > " + c.urlFoto);
+                }
+                carros.add(c);
+            }
+            if (LOG_ON) {
+                Log.d(TAG, carros.size() + " encontrados.");
+            }
+        } catch (JSONException e) {
+            throw new IOException(e.getMessage(), e);
+        }
+        return carros;
+    }
+}
