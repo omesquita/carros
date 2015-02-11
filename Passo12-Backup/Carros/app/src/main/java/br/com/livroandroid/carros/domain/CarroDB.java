@@ -32,7 +32,7 @@ public class CarroDB extends SQLiteOpenHelper {
     private static final String TAG = "sql";
 
     // Nome do banco
-    private static final String NOME_BANCO = "livro_android.sqlite";
+    public static final String NOME_BANCO = "livro_android.sqlite";
     private static final int VERSAO_BANCO = 1;
 
     public CarroDB(Context context) {
