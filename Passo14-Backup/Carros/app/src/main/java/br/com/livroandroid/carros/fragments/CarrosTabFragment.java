@@ -13,6 +13,7 @@ import com.google.samples.apps.iosched.ui.widget.SlidingTabLayout;
 import br.com.livroandroid.carros.R;
 import br.com.livroandroid.carros.adapter.TabsAdapter;
 import livroandroid.lib.utils.Prefs;
+import livroandroid.lib.utils.PrefsFile;
 
 /**
  * Fragment que controla as Tabs dos carros (classicos,esportivos,luxo)
@@ -52,7 +53,7 @@ public class CarrosTabFragment extends BaseFragment {
             @Override
             public void onPageSelected(int position) {
                 // Salva o índice da página/tab selecionada
-                Prefs.setInteger(getContext(), "tabIdx", viewPager.getCurrentItem());
+                PrefsFile.setInteger(getContext(), "tabIdx", viewPager.getCurrentItem());
                 backupManager.dataChanged();
             }
 
@@ -65,7 +66,7 @@ public class CarrosTabFragment extends BaseFragment {
             }
         });
         // Inicia o aplicativo com o índice da última tab/página selecionada
-        int tabIdx = Prefs.getInteger(getContext(), "tabIdx");
+        int tabIdx = PrefsFile.getInteger(getContext(), "tabIdx");
         viewPager.setCurrentItem(tabIdx);
         return view;
     }
