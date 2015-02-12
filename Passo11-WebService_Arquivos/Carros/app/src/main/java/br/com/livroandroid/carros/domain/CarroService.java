@@ -24,10 +24,36 @@ public class CarroService {
     private static final String TAG = "CarroService";
 
     public static List<Carro> getCarros(Context context, String tipo) throws IOException {
+
+        List<Carro> carros = getCarrosFromArquivo(context,tipo);
+        if(carros != null && carros.size() > 0) {
+            // Retorna os carros lidos do arquivo
+            return carros;
+        }
+        // Se não encontrar busca no web service
+        carros = getCarrosFromWebService(context,tipo);
+        return carros;
+    }
+
+    public static List<Carro> getCarrosFromArquivo(Context context, String tipo) throws IOException {
+        String fileName = String.format("carros_%s.json",tipo);
+        Log.d(TAG,"Abrindo arquivo: " + fileName);
+        String json = FileUtils.readFile(context,fileName,"UTF-8");
+        if(json == null) {
+            Log.d(TAG,"Arquivo "+fileName+" não encontrado.");
+            return null;
+        }
+        List<Carro> carros = parserJSON(context, json);
+        Log.d(TAG,"Carros lidos do arquivo "+fileName+".");
+        return carros;
+    }
+
+    public static List<Carro> getCarrosFromWebService(Context context, String tipo) throws IOException {
         String url = URL.replace("{tipo}", tipo);
+        Log.d(TAG,"URL: " + url);
         String json = HttpHelper.doGet(url);
         salvaArquivoNaMemoriaInterna(context, url, json);
-        salvaArquivoNaMemoriaExterna(context,url,json);
+        //salvaArquivoNaMemoriaExterna(context,url,json);
         List<Carro> carros = parserJSON(context, json);
         return carros;
     }
@@ -36,7 +62,7 @@ public class CarroService {
         String fileName = url.substring(url.lastIndexOf("/")+1);
         // Cria o arquivo, exemplo:
         // /data/data/br.com.livroandroid.carros/files/carros_luxo.json
-        File file = FileUtils.getPrivateFile(context, fileName);
+        File file = FileUtils.getFile(context, fileName);
         // Escreve a string no arquivo
         IOUtils.writeString(file, json);
         Log.d(TAG, "Arquivo salvo: " + file);
@@ -45,12 +71,12 @@ public class CarroService {
     private static void salvaArquivoNaMemoriaExterna(Context context, String url, String json) {
         String fileName = url.substring(url.lastIndexOf("/")+1);
         // Cria o arquivo, exemplo:
-        // /data/data/br.com.livroandroid.carros/files/luxo.json
+        //  /storage/sdcard/Android/data/br.com.livroandroid.carros/files/Download/carros_classicos.json
         File f = SDCardUtils.getPrivateFile(context, fileName, Environment.DIRECTORY_DOWNLOADS);
         IOUtils.writeString(f, json);
         Log.d(TAG, "1) Arquivo privado salvo na pasta downloads: " + f);
 
-        // /data/data/br.com.livroandroid.carros/files/luxo.json
+        // /storage/sdcard/Download/carros_classicos.json
         f = SDCardUtils.getPublicFile(fileName, Environment.DIRECTORY_DOWNLOADS);
         IOUtils.writeString(f, json);
         Log.d(TAG, "2) Arquivo público salvo na pasta downloads: " + f);
