@@ -24,60 +24,38 @@ public class CarroService {
     }
 
     public static List<Carro> getCarros(Context context, String tipo, boolean refresh) throws IOException {
-
-        List<Carro> carros = null;
-
-        boolean buscaNoBancoDeDados = !refresh;
-        if (buscaNoBancoDeDados) {
-            // Busca no banco de dados
-            carros = getCarrosFromBanco(context, tipo);
+        CarroDB db = new CarroDB(context);
+        if (!refresh) {
+            // Consulta no banco de dados
+            List<Carro> carros = db.findAllByTipo(tipo);
             if (carros != null && carros.size() > 0) {
-                // Retorna os carros encontrados do banco
+                Log.d(TAG, "Retornando " + carros.size() + " carros [" + tipo + "] do banco");
+                for (Carro c: carros) {
+                    Log.d(TAG,c.nome + " - "  +c.tipo);
+                }
+                // Se existe retorna os carros salvos
                 return carros;
             }
         }
 
-        // Se não encontrar busca no web service
-        carros = getCarrosFromWebService(context, tipo);
-        return carros;
-    }
-
-    public static List<Carro> getCarrosFromBanco(Context context, String tipo) throws IOException {
-        CarroDB db = new CarroDB(context);
-        try {
-            List<Carro> carros = db.findAllByTipo(tipo);
-            Log.d(TAG, "Retornando " + carros.size() + " carros [" + tipo + "] do banco");
-            return carros;
-        } finally {
-            db.close();
-        }
-    }
-
-    public static List<Carro> getCarrosFromWebService(Context context, String tipo) throws IOException {
+        // Caso não existe no banco de dados busca no web service
         String url = URL.replace("{tipo}", tipo);
-        Log.d(TAG, "URL: " + url);
+        Log.d(TAG, "Carros [" + tipo + "]: " + url);
         String json = HttpHelper.doGet(url);
         List<Carro> carros = parserJSON(context, json);
-        salvarCarros(context, tipo, carros);
-        return carros;
-    }
 
-    // Salva os carros no banco de dados
-    private static void salvarCarros(Context context, String tipo, List<Carro> carros) {
-        CarroDB db = new CarroDB(context);
-        try {
-            // Deleta os carros antigos pelo tipo para limpar o banco
-            db.deleteCarrosByTipo(tipo);
+        // Deleta os carros pelo tipo para limpar o banco
+        db.deleteCarrosByTipo(tipo);
 
-            // Salva todos os carros
-            for (Carro c : carros) {
-                c.tipo = tipo;
-                Log.d(TAG,"Salvando o carro " + c.nome);
-                db.save(c);
-            }
-        } finally {
-            db.close();
+        // Salva todos os carros
+        for (Carro c : carros) {
+            c.tipo = tipo;
+            db.save(c);
         }
+
+        Log.d(TAG, "Carros salvos no banco");
+
+        return carros;
     }
 
     private static List<Carro> parserJSON(Context context, String json) throws IOException {
@@ -95,6 +73,10 @@ public class CarroService {
                 c.desc = jsonCarro.optString("desc");
                 c.urlFoto = jsonCarro.optString("url_foto");
                 c.urlInfo = jsonCarro.optString("url_info");
+                c.urlVideo = jsonCarro.optString("url_video");
+                //c.urlVideo = "https://s3-sa-east-1.amazonaws.com/lecheta-livros/carros/videos/ferrari_ff.mp4";
+                c.latitude = jsonCarro.optString("latitude");
+                c.longitude = jsonCarro.optString("longitude");
                 if (LOG_ON) {
                     Log.d(TAG, "Carro " + c.nome + " > " + c.urlFoto);
                 }
