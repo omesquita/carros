@@ -1,10 +1,7 @@
 package br.com.livroandroid.carros.fragments;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.widget.PopupMenuCompat;
 import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -76,24 +73,27 @@ public class CarroFragment extends BaseFragment {
         } else if (item.getItemId() == R.id.action_maps) {
             toast("Mapa");
         } else if (item.getItemId() == R.id.action_video) {
+            // URL do vídeo
             final String url = carro.urlVideo;
-            View menuItemView = getActivity().findViewById(R.id.action_video); // SAME ID AS MENU ID
-            if(menuItemView != null) {
+            // Lê a view que é a âncora do popup
+            View menuItemView = getActivity().findViewById(item.getItemId());
+            if (menuItemView != null) {
+                // Cria o PopupMenu posicionado na âncora
                 PopupMenu popupMenu = new PopupMenu(getActionBar().getThemedContext(), menuItemView);
                 popupMenu.inflate(R.menu.menu_popup_video);
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener(){
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         if (item.getItemId() == R.id.action_video_browser) {
                             // Abre o vídeo no browser
-                            IntentUtils.openBrowser(getContext(),url);
+                            IntentUtils.openBrowser(getContext(), url);
                         } else if (item.getItemId() == R.id.action_video_player) {
                             // Abre o vídeo no Player de Vídeo Nativo
                             IntentUtils.showVideo(getContext(), url);
                         } else if (item.getItemId() == R.id.action_video_videoview) {
                             // Abre outra activity com VideoView
                             Intent intent = new Intent(getContext(), VideoActivity.class);
-                            intent.putExtra("carro",carro);
+                            intent.putExtra("carro", carro);
                             startActivity(intent);
                         }
                         return true;
@@ -109,7 +109,7 @@ public class CarroFragment extends BaseFragment {
     public void setCarro(Carro carro) {
         this.carro = carro;
 
-        if(carro != null) {
+        if (carro != null) {
             //setTextString(R.id.tNome,carro.nome);
             setTextString(R.id.tDesc, carro.desc);
 

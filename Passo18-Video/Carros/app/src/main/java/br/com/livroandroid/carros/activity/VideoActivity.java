@@ -1,16 +1,13 @@
 package br.com.livroandroid.carros.activity;
 
 import android.content.Intent;
-import android.support.v4.app.NavUtils;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
+import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
 
 import br.com.livroandroid.carros.R;
 import br.com.livroandroid.carros.domain.Carro;
 import br.com.livroandroid.carros.fragments.VideoFragment;
-import livroandroid.lib.activity.*;
 
 public class VideoActivity extends BaseActivity {
 
@@ -29,19 +26,21 @@ public class VideoActivity extends BaseActivity {
         getSupportActionBar().setTitle(carro.nome);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        if(savedInstanceState == null) {
+        if (savedInstanceState == null) {
+            // Adiciona o fragment no layout da activity
             VideoFragment videoFragment = new VideoFragment();
             videoFragment.setArguments(getIntent().getExtras());
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragLayout,videoFragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragLayout, videoFragment).commit();
         }
     }
 
-    @Override public boolean onOptionsItemSelected(MenuItem item){
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent intent = NavUtils.getParentActivityIntent(getActivity());;
-                intent.putExtra("carro",carro);
-                NavUtils.navigateUpTo(getActivity(),intent);
+                Intent intent = NavUtils.getParentActivityIntent(getActivity());
+                intent.putExtra("carro", carro);
+                NavUtils.navigateUpTo(getActivity(), intent);
                 return true;
         }
         return super.onOptionsItemSelected(item);

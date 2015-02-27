@@ -74,7 +74,6 @@ public class CarroService {
                 c.urlFoto = jsonCarro.optString("url_foto");
                 c.urlInfo = jsonCarro.optString("url_info");
                 c.urlVideo = jsonCarro.optString("url_video");
-                //c.urlVideo = "https://s3-sa-east-1.amazonaws.com/lecheta-livros/carros/videos/ferrari_ff.mp4";
                 c.latitude = jsonCarro.optString("latitude");
                 c.longitude = jsonCarro.optString("longitude");
                 if (LOG_ON) {
