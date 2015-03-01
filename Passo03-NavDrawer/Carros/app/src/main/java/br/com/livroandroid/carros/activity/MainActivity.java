@@ -61,7 +61,7 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
     public NavigationDrawerFragment.NavDrawerListView getNavDrawerView(NavigationDrawerFragment navDrawerFrag, LayoutInflater layoutInflater, ViewGroup container) {
         View view = layoutInflater.inflate(R.layout.nav_drawer_listview, container, false);
 
-        navDrawerFrag.setHeaderValues(view, R.id.listViewContainer, R.drawable.nav_drawer_header, R.drawable.ic_logo_user, R.string.nav_drawer_username, R.string.nav_drawer_email);
+       navDrawerFrag.setHeaderValues(view, R.id.listViewContainer, R.drawable.nav_drawer_header, R.drawable.ic_logo_user, R.string.nav_drawer_username, R.string.nav_drawer_email);
 
         return new NavigationDrawerFragment.NavDrawerListView(view,R.id.listView);
     }
