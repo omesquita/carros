@@ -7,11 +7,9 @@ import br.com.livroandroid.carros.domain.Carro;
 import br.com.livroandroid.carros.fragments.CarroFragment;
 
 public class CarroActivity extends BaseActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_carro);
 
         // Configura a Toolbar como a action bar

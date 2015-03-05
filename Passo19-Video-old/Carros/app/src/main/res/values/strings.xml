@@ -37,10 +37,11 @@
 
     <!-- Configurações -->
     <string name="title_activity_configuracoes_activivity">Configurações</string>
-    <string name="title_activity_carros">Carros</string>
+    <string name="title_activity_video">Video</string>
 
     <!-- menu_popup_video.xml -->
     <string name="action_video_browser">Browser</string>
     <string name="action_video_player">Video Player</string>
     <string name="action_video_videoview">VideoView</string>
+
 </resources>

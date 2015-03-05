@@ -1,7 +1,5 @@
 package br.com.livroandroid.carros.fragments;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
@@ -77,10 +75,9 @@ public class CarroFragment extends BaseFragment {
         } else if (item.getItemId() == R.id.action_video) {
             // URL do vídeo
             final String url = carro.urlVideo;
-            toast("URL: " + url);
             // Lê a view que é a âncora do popup
             View menuItemView = getActivity().findViewById(item.getItemId());
-            if (menuItemView != null && url != null) {
+            if (menuItemView != null) {
                 // Cria o PopupMenu posicionado na âncora
                 PopupMenu popupMenu = new PopupMenu(getActionBar().getThemedContext(), menuItemView);
                 popupMenu.inflate(R.menu.menu_popup_video);
@@ -110,9 +107,9 @@ public class CarroFragment extends BaseFragment {
 
     // Método público chamado pela activity para atualizar os dados do carro
     public void setCarro(Carro carro) {
-        if(carro != null) {
-            this.carro = carro;
+        this.carro = carro;
 
+        if (carro != null) {
             //setTextString(R.id.tNome,carro.nome);
             setTextString(R.id.tDesc, carro.desc);
 

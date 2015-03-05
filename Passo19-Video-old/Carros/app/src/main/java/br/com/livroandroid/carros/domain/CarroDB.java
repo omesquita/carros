@@ -116,40 +116,6 @@ public class CarroDB extends SQLiteOpenHelper {
         }
     }
 
-    // Busca o carro pelo id
-    public Carro findById(Long id) {
-        SQLiteDatabase db = getReadableDatabase();
-        try {
-            // select * from carro
-            Cursor cursor = db.query("carro", null, "_id = '" + id + "'", null, null, null, null, null);
-            if(cursor.moveToFirst()) {
-                Carro carro = new Carro();
-                read(cursor, carro);
-                return carro;
-            }
-            return null;
-        } finally {
-            db.close();
-        }
-    }
-
-    // Busca o carro pelo nome
-    public Carro findByNome(String nome) {
-        SQLiteDatabase db = getReadableDatabase();
-        try {
-            // select * from carro
-            Cursor cursor = db.query("carro", null, "nome = ?", new String[]{nome}, null, null, null, null);
-            if(cursor.moveToFirst()) {
-                Carro carro = new Carro();
-                read(cursor, carro);
-                return carro;
-            }
-            return null;
-        } finally {
-            db.close();
-        }
-    }
-
     // Consulta a lista com todos os carros
     public List<Carro> findAll() {
         SQLiteDatabase db = getReadableDatabase();
@@ -176,32 +142,29 @@ public class CarroDB extends SQLiteOpenHelper {
     }
 
     // Lê o cursor e cria a lista de carros
-    private List<Carro> toList(Cursor cursor) {
+    private List<Carro> toList(Cursor c) {
         List<Carro> carros = new ArrayList<Carro>();
 
-        if (cursor.moveToFirst()) {
+        if (c.moveToFirst()) {
             do {
                 Carro carro = new Carro();
-                read(cursor, carro);
                 carros.add(carro);
 
-            } while (cursor.moveToNext());
+                // recupera os atributos de carro
+                carro.id = c.getLong(c.getColumnIndex("_id"));
+                carro.nome = c.getString(c.getColumnIndex("nome"));
+                carro.desc = c.getString(c.getColumnIndex("desc"));
+                carro.urlInfo = c.getString(c.getColumnIndex("url_info"));
+                carro.urlFoto = c.getString(c.getColumnIndex("url_foto"));
+                carro.urlVideo = c.getString(c.getColumnIndex("url_video"));
+                carro.latitude = c.getString(c.getColumnIndex("latitude"));
+                carro.longitude = c.getString(c.getColumnIndex("longitude"));
+                carro.tipo = c.getString(c.getColumnIndex("tipo"));
+
+            } while (c.moveToNext());
         }
 
         return carros;
-    }
-
-    // Faz a leitura os atributos de carro
-    private void read(Cursor c, Carro carro) {
-        carro.id = c.getLong(c.getColumnIndex("_id"));
-        carro.nome = c.getString(c.getColumnIndex("nome"));
-        carro.desc = c.getString(c.getColumnIndex("desc"));
-        carro.urlInfo = c.getString(c.getColumnIndex("url_info"));
-        carro.urlFoto = c.getString(c.getColumnIndex("url_foto"));
-        carro.urlVideo = c.getString(c.getColumnIndex("url_video"));
-        carro.latitude = c.getString(c.getColumnIndex("latitude"));
-        carro.longitude = c.getString(c.getColumnIndex("longitude"));
-        carro.tipo = c.getString(c.getColumnIndex("tipo"));
     }
 
     // Executa um SQL

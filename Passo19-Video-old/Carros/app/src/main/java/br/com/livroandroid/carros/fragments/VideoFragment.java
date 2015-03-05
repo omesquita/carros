@@ -3,6 +3,7 @@ package br.com.livroandroid.carros.fragments;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,7 @@ import br.com.livroandroid.carros.R;
 import br.com.livroandroid.carros.domain.Carro;
 
 /**
- * A simple {@link android.support.v4.app.Fragment} subclass.
+ * A simple {@link Fragment} subclass.
  */
 public class VideoFragment extends BaseFragment {
 
@@ -26,7 +27,7 @@ public class VideoFragment extends BaseFragment {
 
         Carro c = (Carro) getArguments().getSerializable("carro");
 
-        if (c != null && c.urlVideo != null) {
+        if (c != null) {
             videoView.setVideoURI(Uri.parse(c.urlVideo));
             videoView.setMediaController(new MediaController(getContext()));
             videoView.start();
