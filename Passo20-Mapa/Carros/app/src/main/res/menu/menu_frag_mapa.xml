@@ -1,0 +1,24 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_mapa_normal"
+        android:title="@string/mapa_normal"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_mapa_satelite"
+        android:title="@string/mapa_satelite"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_mapa_terreno"
+        android:title="@string/mapa_terreno"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_mapa_hibrido"
+        android:title="@string/mapa_hibrido"
+        app:showAsAction="never" />
+
+</menu>

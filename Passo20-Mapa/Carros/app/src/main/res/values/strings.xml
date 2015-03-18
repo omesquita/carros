@@ -43,4 +43,10 @@
     <string name="action_video_browser">Browser</string>
     <string name="action_video_player">Video Player</string>
     <string name="action_video_videoview">VideoView</string>
+
+    <!-- menu_frag_mapa.xml -->
+    <string name="mapa_normal">Normal</string>
+    <string name="mapa_satelite">Satélite</string>
+    <string name="mapa_terreno">Terreno</string>
+    <string name="mapa_hibrido">Híbrido</string>
 </resources>

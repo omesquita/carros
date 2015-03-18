@@ -5,6 +5,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.MediaController;
@@ -26,6 +29,8 @@ import br.com.livroandroid.carros.domain.Carro;
 public class MapaFragment extends BaseFragment implements OnMapReadyCallback {
 
 
+    private GoogleMap map;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mapa, container, false);
@@ -33,11 +38,14 @@ public class MapaFragment extends BaseFragment implements OnMapReadyCallback {
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.mapFragment);
         mapFragment.getMapAsync(this);
 
+        setHasOptionsMenu(true);
+
         return view;
     }
 
     @Override
     public void onMapReady(GoogleMap map) {
+        this.map = map;
         Carro c = (Carro) getArguments().getSerializable("carro");
         
         if(c != null) {
@@ -57,7 +65,28 @@ public class MapaFragment extends BaseFragment implements OnMapReadyCallback {
             // MAP_TYPE_TERRAIN, MAP_TYPE_HYBRID and MAP_TYPE_NONE
             map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
         }
-        
-        
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_frag_mapa, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(map != null) {
+            if (item.getItemId() == R.id.action_mapa_normal) {
+                map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+            } else if (item.getItemId() == R.id.action_mapa_satelite) {
+                map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+            } else if (item.getItemId() == R.id.action_mapa_terreno) {
+                map.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+            } else if (item.getItemId() == R.id.action_mapa_hibrido) {
+                map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+            }
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
