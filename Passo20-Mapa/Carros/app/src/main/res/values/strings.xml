@@ -45,8 +45,12 @@
     <string name="action_video_videoview">VideoView</string>
 
     <!-- menu_frag_mapa.xml -->
-    <string name="mapa_normal">Normal</string>
-    <string name="mapa_satelite">Satélite</string>
-    <string name="mapa_terreno">Terreno</string>
-    <string name="mapa_hibrido">Híbrido</string>
+    <string name="mapa_normal">Modo Normal</string>
+    <string name="mapa_satelite">Modo Satélite</string>
+    <string name="mapa_terreno">Modo Terreno</string>
+    <string name="mapa_hibrido">Modo Híbrido</string>
+    <string name="mapa_location_directions">Direções</string>
+    <string name="mapa_location_carro">Localização do Carro</string>
+    <string name="mapa_zoom_in">Zoom (+)</string>
+    <string name="mapa_zoom_out">Zoom (-)</string>
 </resources>

@@ -30,6 +30,7 @@ public class MapaFragment extends BaseFragment implements OnMapReadyCallback {
 
 
     private GoogleMap map;
+    private Carro c;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -40,20 +41,21 @@ public class MapaFragment extends BaseFragment implements OnMapReadyCallback {
 
         setHasOptionsMenu(true);
 
+        this.c = (Carro) getArguments().getSerializable("carro");
+
         return view;
     }
 
     @Override
     public void onMapReady(GoogleMap map) {
         this.map = map;
-        Carro c = (Carro) getArguments().getSerializable("carro");
-        
+
         if(c != null) {
             Log.d(TAG, "Carro " + c.nome + " > " + c.urlFoto + ", lat/lng " + c.latitude + "/" + c.longitude);
 
             LatLng location = new LatLng(Double.parseDouble(c.latitude), Double.parseDouble(c.longitude));
 
-            map.setMyLocationEnabled(true);
+            //map.setMyLocationEnabled(true);
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 13));
 
             map.addMarker(new MarkerOptions()
@@ -75,14 +77,32 @@ public class MapaFragment extends BaseFragment implements OnMapReadyCallback {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(map != null) {
-            if (item.getItemId() == R.id.action_mapa_normal) {
+        if(map != null && c != null) {
+            if (item.getItemId() == R.id.action_location_carro) {
+                // Posiciona mapa na localização da fábrica
+                LatLng location = new LatLng(Double.parseDouble(c.latitude), Double.parseDouble(c.longitude));
+                map.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 13));
+            }else if (item.getItemId() == R.id.action_location_directions) {
+                // Posiciona mapa no usuário
+                toast("directions");
+            } else if (item.getItemId() == R.id.action_zoom_in) {
+                toast("zoom +");
+                map.animateCamera(CameraUpdateFactory.zoomIn());
+            } else if (item.getItemId() == R.id.action_zoom_out) {
+                toast("zoom -");
+                map.animateCamera(CameraUpdateFactory.zoomOut());
+            }
+            else if (item.getItemId() == R.id.action_mapa_normal) {
+                // Modo Normal
                 map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+                // Modo Satélite
             } else if (item.getItemId() == R.id.action_mapa_satelite) {
                 map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
             } else if (item.getItemId() == R.id.action_mapa_terreno) {
+                // Modo Terreno
                 map.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
             } else if (item.getItemId() == R.id.action_mapa_hibrido) {
+                // Modo Híbrido
                 map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
             }
         }
