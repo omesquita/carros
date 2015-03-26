@@ -12,6 +12,8 @@
         <item name="colorControlHighlight">@color/control_highlight</item>
         <!-- Action Mode Overlay -->
         <item name="windowActionModeOverlay">true</item>
+
+        <item name="actionModeBackground">@color/primary</item>
     </style>
 
     <!-- Tema para o Nav Drawer. -->
