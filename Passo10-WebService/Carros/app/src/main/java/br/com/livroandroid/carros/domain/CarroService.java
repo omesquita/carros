@@ -38,6 +38,8 @@ public class CarroService {
                 c.desc = jsonCarro.optString("desc");
                 c.urlFoto = jsonCarro.optString("url_foto");
                 c.urlInfo = jsonCarro.optString("url_info");
+                c.latitude = jsonCarro.optString("latitude");
+                c.longitude = jsonCarro.optString("longitude");
                 if (LOG_ON) {
                     Log.d(TAG, "Carro " + c.nome + " > " + c.urlFoto);
                 }
