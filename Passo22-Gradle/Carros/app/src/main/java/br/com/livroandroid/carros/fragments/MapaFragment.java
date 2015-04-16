@@ -66,16 +66,16 @@ public class MapaFragment extends BaseFragment implements OnMapReadyCallback, Go
             CameraUpdate update = CameraUpdateFactory.newLatLngZoom(location, 13);
             //map.moveCamera(update);
 
-            map.animateCamera(update, 10000, new GoogleMap.CancelableCallback() {
-                @Override
-                public void onFinish() {
-                    Toast.makeText(getContext(), "Mapa centralizado.", Toast.LENGTH_SHORT).show();
-                }
-                @Override
-                public void onCancel() {
-                    Toast.makeText(getContext(), "Animação cancelada.", Toast.LENGTH_SHORT).show();
-                }
-            });
+//            map.animateCamera(update, 10000, new GoogleMap.CancelableCallback() {
+//                @Override
+//                public void onFinish() {
+//                    Toast.makeText(getContext(), "Mapa centralizado.", Toast.LENGTH_SHORT).show();
+//                }
+//                @Override
+//                public void onCancel() {
+//                    Toast.makeText(getContext(), "Animação cancelada.", Toast.LENGTH_SHORT).show();
+//                }
+//            });
 
             // Marcador no local da fábrica
             map.addMarker(new MarkerOptions()
