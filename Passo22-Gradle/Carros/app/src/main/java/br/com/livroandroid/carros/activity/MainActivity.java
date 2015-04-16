@@ -41,9 +41,9 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
         setContentView(R.layout.activity_main);
 
         if(CarroService.isBuildAzul()) {
-            toast("AZUL!");
+            toast("AZUL: " + getString(R.string.API_KEY));
         } else if(CarroService.isBuildVermelho()) {
-            toast("VERMELHO!");
+            toast("VERMELHO: " + getString(R.string.API_KEY));
         }
         Log.d("livroandroid","Carros build " + getString(R.string.app_name));
 

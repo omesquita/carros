@@ -12,12 +12,23 @@ android {
         versionName "1.0"
     }
 
+    signingConfigs {
+        release {
+            storeFile file("carros.keystore")
+            storePassword "carros"
+            keyAlias "carros"
+            keyPassword "carros"
+        }
+    }
+
     productFlavors {
         azul {
             applicationId "br.com.livroandroid.carros.azul"
+            signingConfig signingConfigs.release
         }
         vermelho {
             applicationId "br.com.livroandroid.carros.vermelho"
+            signingConfig signingConfigs.release
         }
     }
 

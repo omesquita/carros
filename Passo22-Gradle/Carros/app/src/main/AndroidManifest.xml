@@ -28,9 +28,10 @@
         <uses-feature
             android:glEsVersion="0x00020000"
             android:required="true"/>
+
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyDYCu8-Ijlg-dug-VzT1SC_6fekDKn0oTQ"/>
+            android:value="@string/API_KEY"/>
 
         <activity
             android:name=".activity.MainActivity"
