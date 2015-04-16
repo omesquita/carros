@@ -41,10 +41,11 @@ android {
 }
 
 repositories {
+    mavenCentral()
     maven {
         url "file:///home/ricardo/gradle/rep"
     }
-    maven {
+    maven   {
         url "file:///r:/home/ricardo/gradle/rep"
     }
 }
