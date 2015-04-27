@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.livroandroid.carros.R;
-import livroandroid.lib.utils.FIleUtils;
+import livroandroid.lib.utils.FileUtils;
 import livroandroid.lib.utils.XMLUtils;
 
 public class CarroService {
@@ -32,11 +32,11 @@ public class CarroService {
 
     private static String readFileFromTipo(Context context, String tipo) throws IOException {
         if ("classicos".equals(tipo)) {
-            return FIleUtils.readRawFileString(context, R.raw.carros_classicos, "UTF-8");
+            return FileUtils.readRawFileString(context, R.raw.carros_classicos, "UTF-8");
         } else if ("esportivos".equals(tipo)) {
-            return FIleUtils.readRawFileString(context, R.raw.carros_esportivos, "UTF-8");
+            return FileUtils.readRawFileString(context, R.raw.carros_esportivos, "UTF-8");
         }
-        return FIleUtils.readRawFileString(context, R.raw.carros_luxo, "UTF-8");
+        return FileUtils.readRawFileString(context, R.raw.carros_luxo, "UTF-8");
     }
 
     private static List<Carro> parserXML(Context context, String xml) {
