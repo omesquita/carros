@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +17,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.github.ksoichiro.android.observablescrollview.ObservableRecyclerView;
+import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
+import com.github.ksoichiro.android.observablescrollview.ScrollState;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -33,7 +38,7 @@ import livroandroid.lib.utils.IOUtils;
 import livroandroid.lib.utils.SDCardUtils;
 
 public class CarrosFragment extends BaseFragment {
-    protected RecyclerView recyclerView;
+    protected ObservableRecyclerView recyclerView;
     private List<Carro> carros;
     private LinearLayoutManager mLayoutManager;
     private String tipo;
@@ -54,11 +59,11 @@ public class CarrosFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_carros, container, false);
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        recyclerView = (ObservableRecyclerView) view.findViewById(R.id.recyclerView);
+        recyclerView.setScrollViewCallbacks(ScrollViewCallbacks());
         mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        //recyclerView.setHasFixedSize(true);
 
         // Swipe to Refresh
         swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeToRefresh);
@@ -69,6 +74,34 @@ public class CarrosFragment extends BaseFragment {
                 R.color.refresh_progress_3);
 
         return view;
+    }
+
+    private ObservableScrollViewCallbacks ScrollViewCallbacks() {
+        return new ObservableScrollViewCallbacks() {
+            @Override
+            public void onScrollChanged(int i, boolean b, boolean b1) {
+
+            }
+
+            @Override
+            public void onDownMotionEvent() {
+
+            }
+
+            @Override
+            public void onUpOrCancelMotionEvent(ScrollState scrollState) {
+                android.support.v7.app.ActionBar a = getActionBar();
+                if (scrollState == ScrollState.UP) {
+                    if (a.isShowing()) {
+                        a.hide();
+                    }
+                } else if (scrollState == ScrollState.DOWN) {
+                    if (!a.isShowing()) {
+                        a.show();
+                    }
+                }
+            }
+        };
     }
 
     private SwipeRefreshLayout.OnRefreshListener OnRefreshListener() {
@@ -247,6 +280,7 @@ public class CarrosFragment extends BaseFragment {
     private void updateActionModeTitle() {
         if (actionMode != null) {
             actionMode.setTitle("Selecione os carros.");
+            actionMode.setSubtitle(null);
             List<Carro> selectedCarros = getSelectedCarros();
             if (selectedCarros.size() == 1) {
                 actionMode.setSubtitle("1 carro selecionado");
