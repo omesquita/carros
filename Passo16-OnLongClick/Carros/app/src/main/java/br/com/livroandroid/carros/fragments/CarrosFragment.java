@@ -239,6 +239,7 @@ public class CarrosFragment extends BaseFragment {
     private void updateActionModeTitle() {
         if (actionMode != null) {
             actionMode.setTitle("Selecione os carros.");
+            actionMode.setSubtitle(null);
             List<Carro> selectedCarros = getSelectedCarros();
             if (selectedCarros.size() == 1) {
                 actionMode.setSubtitle("1 carro selecionado");

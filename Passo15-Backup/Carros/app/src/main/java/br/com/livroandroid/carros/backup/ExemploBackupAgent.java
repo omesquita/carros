@@ -33,8 +33,6 @@ public class ExemploBackupAgent extends BackupAgentHelper {
         // Também podemos criar um FileBackupHelper para fazer backup de arquivos
         FileBackupHelper file = new FileBackupHelper(this,"tabIdx.txt");
         addHelper("livroAndroid-file", file);
-
-        addHelper("livroandroid-database", new DbBackupHelper(this, CarroDB.NOME_BANCO));
     }
     @Override
     public void onBackup(ParcelFileDescriptor oldState, BackupDataOutput data,

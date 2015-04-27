@@ -12,7 +12,7 @@
         <item name="colorControlHighlight">@color/control_highlight</item>
         <!-- Action Mode Overlay -->
         <item name="windowActionModeOverlay">true</item>
-
+        <!-- Cor da Action Bar de Contexto (CAB) -->
         <item name="actionModeBackground">@color/primary</item>
     </style>
 
