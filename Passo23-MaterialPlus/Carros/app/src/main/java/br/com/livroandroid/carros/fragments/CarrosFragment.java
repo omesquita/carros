@@ -4,12 +4,14 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,10 +19,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.DecelerateInterpolator;
 
 import com.github.ksoichiro.android.observablescrollview.ObservableRecyclerView;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
 import com.github.ksoichiro.android.observablescrollview.ScrollState;
+import com.nineoldandroids.animation.Animator;
+import com.nineoldandroids.animation.AnimatorListenerAdapter;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -36,6 +41,8 @@ import br.com.livroandroid.carros.domain.CarroService;
 import livroandroid.lib.utils.AndroidUtils;
 import livroandroid.lib.utils.IOUtils;
 import livroandroid.lib.utils.SDCardUtils;
+
+import static com.nineoldandroids.view.ViewPropertyAnimator.animate;
 
 public class CarrosFragment extends BaseFragment {
     protected ObservableRecyclerView recyclerView;
@@ -90,14 +97,41 @@ public class CarrosFragment extends BaseFragment {
 
             @Override
             public void onUpOrCancelMotionEvent(ScrollState scrollState) {
-                android.support.v7.app.ActionBar a = getActionBar();
+                final android.support.v7.app.ActionBar a = getActionBar();
+                Toolbar toolbar = (Toolbar)getActivity().findViewById(R.id.toolbar);
                 if (scrollState == ScrollState.UP) {
                     if (a.isShowing()) {
                         a.hide();
+
+                        /*animate(toolbar)
+                                .translationY(-toolbar.getBottom())
+                                .alpha(0)
+                                .setDuration(300)
+                                .setInterpolator(new DecelerateInterpolator())
+                        .setListener(new AnimatorListenerAdapter() {
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+                                super.onAnimationEnd(animation);
+                                a.hide();
+                            }
+                        });*/
                     }
                 } else if (scrollState == ScrollState.DOWN) {
                     if (!a.isShowing()) {
                         a.show();
+                        /*animate(toolbar)
+                                .translationY(0)
+                                .alpha(1)
+                                .setDuration(300)
+                                .setInterpolator(new DecelerateInterpolator())
+                            .setListener(new AnimatorListenerAdapter() {
+                                @Override
+                                public void onAnimationEnd(Animator animation) {
+                                    super.onAnimationEnd(animation);
+                                    a.show();
+                                }
+                            });*/
+
                     }
                 }
             }

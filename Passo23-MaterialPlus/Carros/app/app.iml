@@ -116,6 +116,7 @@
     <orderEntry type="library" exported="" name="play-services-appindexing-7.0.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-7.0.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-gcm-7.0.0" level="project" />
+    <orderEntry type="library" exported="" name="library-2.4.0" level="project" />
     <orderEntry type="library" exported="" name="android-observablescrollview-1.5.0" level="project" />
     <orderEntry type="library" exported="" name="recyclerview-v7-22.1.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-wearable-7.0.0" level="project" />
@@ -135,5 +136,6 @@
     <orderEntry type="library" exported="" name="cardview-v7-22.1.0" level="project" />
     <orderEntry type="library" exported="" name="picasso-2.4.0" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-22.1.0" level="project" />
+    <orderEntry type="module" module-name="fab" exported="" />
   </component>
 </module>

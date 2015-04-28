@@ -1,0 +1,119 @@
+<!--
+  Copyright 2014 Google Inc. All rights reserved.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<com.google.samples.apps.iosched.ui.widget.ObservableScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scroll_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:fillViewport="true"
+    android:overScrollMode="never">
+
+    <FrameLayout
+        android:id="@+id/layoutScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipChildren="false">
+
+        <!-- Background photo -->
+        <FrameLayout
+            android:id="@+id/layoutPicture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imgPicture"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:paddingBottom="48dp"
+            android:paddingRight="16dp"
+            android:paddingTop="16dp">
+
+            <TextView
+                android:id="@+id/tTextContents"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="72dp"
+                android:textColor="@color/black"
+                android:text="Session Abstract"/>
+
+        </LinearLayout>
+
+        <!-- Title/subtitle bar (floating; position determined at run time as the content view scrolls) -->
+        <LinearLayout
+            android:id="@+id/layoutHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:paddingBottom="16dp"
+            android:background="@color/gray">
+
+            <include layout="@layout/include_toolbar" />
+
+            <!-- Nome Carro -->
+            <TextView
+                android:id="@+id/tHeaderTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:layout_marginLeft="72dp"
+                android:layout_marginRight="16dp"
+                android:ellipsize="end"
+                android:fontFamily="@string/font_fontFamily_medium"
+                android:lineSpacingMultiplier="1.1"
+                android:maxLines="4"
+                android:text="Titulo aqui"
+                android:textAlignment="viewStart"
+                android:textColor="@color/primary_dark"
+                android:textSize="@dimen/text_size_large"
+                 />
+
+            <!-- Tipo Carro -->
+            <TextView
+                android:id="@+id/tHeaderSubTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="72dp"
+                android:layout_marginRight="16dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="Sub Tititulo"
+                android:textAlignment="viewStart"
+                android:textColor="@color/accent"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <!-- FAB -->
+        <include layout="@layout/include_add_schedule_fab" />
+
+
+    </FrameLayout>
+
+</com.google.samples.apps.iosched.ui.widget.ObservableScrollView>

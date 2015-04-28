@@ -5,6 +5,7 @@ import android.os.Bundle;
 import br.com.livroandroid.carros.R;
 import br.com.livroandroid.carros.domain.Carro;
 import br.com.livroandroid.carros.fragments.CarroFragment;
+import br.com.livroandroid.carros.fragments.CarroFragmentMaterial;
 
 public class CarroActivity extends BaseActivity {
 
@@ -18,7 +19,8 @@ public class CarroActivity extends BaseActivity {
         setUpToolbar();
 
         // Atualiza o carro no fragment
-        CarroFragment cf = (CarroFragment) getSupportFragmentManager().findFragmentById(R.id.CarroFragment);
+        //CarroFragment cf = (CarroFragment) getSupportFragmentManager().findFragmentById(R.id.CarroFragment);
+        CarroFragmentMaterial cf = (CarroFragmentMaterial) getSupportFragmentManager().findFragmentById(R.id.CarroFragment);
         Carro c = (Carro) getIntent().getSerializableExtra("carro");
         cf.setCarro(c);
 

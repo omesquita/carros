@@ -41,6 +41,8 @@ public class SiteLivroFragment extends BaseFragment {
         // Carrega a página
         webview.loadUrl(URL_SOBRE);
 
+        //webview.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+
         // Swipe to Refresh
         swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeToRefresh);
         swipeLayout.setOnRefreshListener(OnRefreshListener());

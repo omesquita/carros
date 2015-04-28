@@ -118,7 +118,7 @@ public class CarroFragment extends BaseFragment {
             this.carro = carro;
 
             //setTextString(R.id.tNome,carro.nome);
-            setTextString(R.id.tDesc, carro.desc);
+            setTextString(R.id.tDesc, carro.desc+"\n"+carro.desc+"\n"+carro.desc);
 
             final ImageView imgView = (ImageView) getView().findViewById(R.id.img);
 
