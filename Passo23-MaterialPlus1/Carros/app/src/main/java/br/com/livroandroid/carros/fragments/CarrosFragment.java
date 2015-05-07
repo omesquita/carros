@@ -115,6 +115,7 @@ public class CarrosFragment extends BaseFragment {
         return new CarroAdapter.CarroOnClickListener() {
             @Override
             public void onClickCarro(View view, int idx) {
+                if(true)return;
                 Carro c = carros.get(idx);
                 if (actionMode == null) {
                     //Toast.makeText(getContext(), "Carro: " + c.nome, Toast.LENGTH_SHORT).show();
