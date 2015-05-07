@@ -73,8 +73,14 @@ public class CarrosFragment extends BaseFragment {
                 R.color.refresh_progress_2,
                 R.color.refresh_progress_3);
 
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        final FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.attachToRecyclerView(recyclerView);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fab.hide(true);
+            }
+        });
 
         return view;
     }
