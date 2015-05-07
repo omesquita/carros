@@ -20,6 +20,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.melnykov.fab.FloatingActionButton;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -70,6 +72,9 @@ public class CarrosFragment extends BaseFragment {
                 R.color.refresh_progress_1,
                 R.color.refresh_progress_2,
                 R.color.refresh_progress_3);
+
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        fab.attachToRecyclerView(recyclerView);
 
         return view;
     }
