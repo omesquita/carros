@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Tema Base com configurações genéricas -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="BaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!--   Cor primária do aplicativo -->
         <item name="colorPrimary">@color/primary</item>
         <!--   Variação escura da cor primária para a status bar e contextual app bars -->
@@ -14,6 +14,10 @@
         <item name="windowActionModeOverlay">true</item>
         <!-- Cor da Action Bar de Contexto (CAB) -->
         <item name="actionModeBackground">@color/primary</item>
+    </style>
+
+    <style name="AppTheme" parent="BaseTheme">
+
     </style>
 
     <!-- Tema para o Nav Drawer. -->
