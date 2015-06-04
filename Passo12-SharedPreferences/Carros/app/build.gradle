@@ -27,5 +27,10 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:22.1.0'
     compile 'com.android.support:cardview-v7:22.1.0'
     compile 'com.squareup.picasso:picasso:2.4.0'
-    compile 'br.com.livroandroid:android-utils:0.0.8'
+    compile 'br.com.livroandroid:android-utils:1.0.0'
+    compile 'com.android.support:design:22.2.0'
+}
+
+repositories {
+    maven { url 'file:///R:/home/ricardo/gradle/rep/' }
 }

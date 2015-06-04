@@ -1,12 +1,12 @@
 package br.com.livroandroid.carros.fragments;
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.samples.apps.iosched.ui.widget.SlidingTabLayout;
 
 import br.com.livroandroid.carros.R;
 import br.com.livroandroid.carros.adapter.TabsAdapter;
@@ -14,28 +14,37 @@ import br.com.livroandroid.carros.adapter.TabsAdapter;
 /**
  * Fragment que controla as Tabs dos carros (classicos,esportivos,luxo)
  */
-public class CarrosTabFragment extends BaseFragment {
-
-    private SlidingTabLayout mSlidingTabLayout;
+public class CarrosTabFragment extends BaseFragment implements TabLayout.OnTabSelectedListener {
     private ViewPager mViewPager;
-
+    private TabLayout tabLayout;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_carros_tab, container, false);
         mViewPager = (ViewPager) view.findViewById(R.id.viewpager);
         mViewPager.setAdapter(new TabsAdapter(getContext(), getChildFragmentManager()));
-        mSlidingTabLayout = (SlidingTabLayout) view.findViewById(R.id.sliding_tabs);
-        mSlidingTabLayout.setCustomTabView(R.layout.tab_layout, R.id.tabText);
-        // Deixa as tabs com mesmo tamanho (layout_weight=1)
-        mSlidingTabLayout.setDistributeEvenly(true);
-        mSlidingTabLayout.setViewPager(mViewPager);
-        mSlidingTabLayout.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
-            @Override
-            public int getIndicatorColor(int i) {
-                // Cor do indicador da tab
-                return getResources().getColor(R.color.accent);
-            }
-        });
+
+        tabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
+        int cor = getContext().getResources().getColor(R.color.white);
+        // Cor branca no texto (fundo azul foi definido no layout)
+        tabLayout.setTabTextColors(cor, cor);
+        // Adiciona as tabs.
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.classicos));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.esportivos));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.luxo));
+        // Listener para tratar eventos de clique na tab.
+        tabLayout.setOnTabSelectedListener(this);
+
+        // Se mudar o ViewPager atualiza a tab selecionada.
+        mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         return view;
     }
+    @Override
+    public void onTabSelected(TabLayout.Tab tab) {
+        // Se alterar a tab, atualiza o ViewPager
+        mViewPager.setCurrentItem(tab.getPosition());
+    }
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) { }
+    @Override
+    public void onTabReselected(TabLayout.Tab tab) { }
 }
