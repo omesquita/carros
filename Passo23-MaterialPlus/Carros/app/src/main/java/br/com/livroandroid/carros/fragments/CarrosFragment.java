@@ -4,28 +4,21 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.view.ViewCompat;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
+
+
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.DecelerateInterpolator;
-
-import com.github.ksoichiro.android.observablescrollview.ObservableRecyclerView;
-import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
-import com.github.ksoichiro.android.observablescrollview.ScrollState;
-import com.nineoldandroids.animation.Animator;
-import com.nineoldandroids.animation.AnimatorListenerAdapter;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -42,10 +35,8 @@ import livroandroid.lib.utils.AndroidUtils;
 import livroandroid.lib.utils.IOUtils;
 import livroandroid.lib.utils.SDCardUtils;
 
-import static com.nineoldandroids.view.ViewPropertyAnimator.animate;
-
 public class CarrosFragment extends BaseFragment {
-    protected ObservableRecyclerView recyclerView;
+    protected RecyclerView recyclerView;
     private List<Carro> carros;
     private LinearLayoutManager mLayoutManager;
     private String tipo;
@@ -60,17 +51,20 @@ public class CarrosFragment extends BaseFragment {
         if (getArguments() != null) {
             this.tipo = getArguments().getString("tipo");
         }
+        if (tipo == null) {
+            tipo = "esportivos";
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_carros, container, false);
 
-        recyclerView = (ObservableRecyclerView) view.findViewById(R.id.recyclerView);
-        recyclerView.setScrollViewCallbacks(ScrollViewCallbacks());
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+        //recyclerView.setHasFixedSize(true);
 
         // Swipe to Refresh
         swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeToRefresh);
@@ -80,62 +74,15 @@ public class CarrosFragment extends BaseFragment {
                 R.color.refresh_progress_2,
                 R.color.refresh_progress_3);
 
+        // FAB
+//        view.findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                toast("Floating Action Button");
+//            }
+//        });
+
         return view;
-    }
-
-    private ObservableScrollViewCallbacks ScrollViewCallbacks() {
-        return new ObservableScrollViewCallbacks() {
-            @Override
-            public void onScrollChanged(int i, boolean b, boolean b1) {
-
-            }
-
-            @Override
-            public void onDownMotionEvent() {
-
-            }
-
-            @Override
-            public void onUpOrCancelMotionEvent(ScrollState scrollState) {
-                final android.support.v7.app.ActionBar a = getActionBar();
-                Toolbar toolbar = (Toolbar)getActivity().findViewById(R.id.toolbar);
-                if (scrollState == ScrollState.UP) {
-                    if (a.isShowing()) {
-                        a.hide();
-
-                        /*animate(toolbar)
-                                .translationY(-toolbar.getBottom())
-                                .alpha(0)
-                                .setDuration(300)
-                                .setInterpolator(new DecelerateInterpolator())
-                        .setListener(new AnimatorListenerAdapter() {
-                            @Override
-                            public void onAnimationEnd(Animator animation) {
-                                super.onAnimationEnd(animation);
-                                a.hide();
-                            }
-                        });*/
-                    }
-                } else if (scrollState == ScrollState.DOWN) {
-                    if (!a.isShowing()) {
-                        a.show();
-                        /*animate(toolbar)
-                                .translationY(0)
-                                .alpha(1)
-                                .setDuration(300)
-                                .setInterpolator(new DecelerateInterpolator())
-                            .setListener(new AnimatorListenerAdapter() {
-                                @Override
-                                public void onAnimationEnd(Animator animation) {
-                                    super.onAnimationEnd(animation);
-                                    a.show();
-                                }
-                            });*/
-
-                    }
-                }
-            }
-        };
     }
 
     private SwipeRefreshLayout.OnRefreshListener OnRefreshListener() {
@@ -200,7 +147,7 @@ public class CarrosFragment extends BaseFragment {
                 }
 
                 //Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
-                actionMode = getActionBarActivity().startSupportActionMode(getActionModeCallback());
+                actionMode = getAppCompatActivity().startSupportActionMode(getActionModeCallback());
 
                 Carro c = carros.get(idx);
                 c.selected = true;
@@ -277,6 +224,17 @@ public class CarrosFragment extends BaseFragment {
                     } finally {
                         db.close();
                     }
+
+                    Snackbar
+                            .make(recyclerView, "Carros excluídos com sucesso.", Snackbar.LENGTH_LONG)
+                            .setAction("OK", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    toast("OK");
+                                }
+                            })
+                            .show();
+
                 } else if (item.getItemId() == R.id.action_share) {
                     toast("Compartilhar: " + selectedCarros);
                     // Dispara a tarefa para fazer downloa das fotos
@@ -370,7 +328,7 @@ public class CarrosFragment extends BaseFragment {
             // Cria o Intent Chooser com as opções
             startActivity(Intent.createChooser(shareIntent, "Enviar Carros"));
 
-            Log.d(TAG,"ShareIntent: " + imageUris);
+            Log.d(TAG, "ShareIntent: " + imageUris);
         }
 
         @Override

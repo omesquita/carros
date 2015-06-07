@@ -128,7 +128,7 @@ public class CarrosFragment extends BaseFragment {
                 }
 
                 //Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
-                actionMode = getActionBarActivity().startSupportActionMode(getActionModeCallback());
+                actionMode = getAppCompatActivity().startSupportActionMode(getActionModeCallback());
 
                 Carro c = carros.get(idx);
                 c.selected = true;

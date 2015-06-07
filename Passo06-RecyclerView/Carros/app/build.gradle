@@ -28,7 +28,3 @@ dependencies {
     compile 'br.com.livroandroid:android-utils:1.0.0'
     compile 'com.android.support:design:22.2.0'
 }
-
-repositories {
-    maven { url 'file:///R:/home/ricardo/gradle/rep/' }
-}
