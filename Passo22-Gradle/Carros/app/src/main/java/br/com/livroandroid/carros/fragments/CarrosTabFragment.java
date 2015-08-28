@@ -5,6 +5,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TableLayout;
 
 import com.google.samples.apps.iosched.ui.widget.SlidingTabLayout;
 
@@ -17,7 +18,7 @@ import livroandroid.lib.utils.Prefs;
  */
 public class CarrosTabFragment extends BaseFragment {
 
-    private SlidingTabLayout mSlidingTabLayout;
+    private TableLayout tableLayout;
     private ViewPager viewPager;
 
     @Override
@@ -26,19 +27,19 @@ public class CarrosTabFragment extends BaseFragment {
         viewPager = (ViewPager) view.findViewById(R.id.viewpager);
         viewPager.setOffscreenPageLimit(2);
         viewPager.setAdapter(new TabsAdapter(getContext(), getChildFragmentManager()));
-        mSlidingTabLayout = (SlidingTabLayout) view.findViewById(R.id.sliding_tabs);
-        mSlidingTabLayout.setCustomTabView(R.layout.tab_layout, R.id.tabText);
+        tableLayout = (SlidingTabLayout) view.findViewById(R.id.sliding_tabs);
+        tableLayout.setCustomTabView(R.layout.tab_layout, R.id.tabText);
         // Deixa as tabs com mesmo tamanho (layout_weight=1)
-        mSlidingTabLayout.setDistributeEvenly(true);
-        mSlidingTabLayout.setViewPager(viewPager);
-        mSlidingTabLayout.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
+        tableLayout.setDistributeEvenly(true);
+        tableLayout.setViewPager(viewPager);
+        tableLayout.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
             @Override
             public int getIndicatorColor(int i) {
                 // Cor do indicador da tab
                 return getResources().getColor(R.color.accent);
             }
         });
-        mSlidingTabLayout.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        tableLayout.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
                 // Salva o índice da página/tab selecionada

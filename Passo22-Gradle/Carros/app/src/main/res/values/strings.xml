@@ -53,4 +53,5 @@
     <string name="mapa_location_carro">Localização do Carro</string>
     <string name="mapa_zoom_in">Zoom (+)</string>
     <string name="mapa_zoom_out">Zoom (-)</string>
+    <string name="title_activity_carro_edit">CarroEditActivity</string>
 </resources>

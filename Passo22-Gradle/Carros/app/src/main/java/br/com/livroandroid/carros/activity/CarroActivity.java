@@ -17,13 +17,16 @@ public class CarroActivity extends BaseActivity {
         // Configura a Toolbar como a action bar
         setUpToolbar();
 
-        // Atualiza o carro no fragment
-        CarroFragment cf = (CarroFragment) getSupportFragmentManager().findFragmentById(R.id.CarroFragment);
-        Carro c = (Carro) getIntent().getSerializableExtra("carro");
-        cf.setCarro(c);
-
         // Título da toolbar e botão up navigation
-        getSupportActionBar().setTitle(c.nome);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        // Atualiza o carro no fragment
+        if(savedInstanceState != null) {
+            CarroFragment cf = (CarroFragment) getSupportFragmentManager().findFragmentById(R.id.CarroFragment);
+            Carro c = (Carro) getIntent().getSerializableExtra("carro");
+            cf.setCarro(c);
+
+            getSupportActionBar().setTitle(c.nome);
+        }
     }
 }
